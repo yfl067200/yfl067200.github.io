@@ -4,6 +4,6 @@ This is my study notes
 
 ## Languages
 
-### Rust
+- [Rust](./computer/languages/rust/toc.md)
 
 
