@@ -2,9 +2,9 @@
 
 ### 單一型態
 
-Rust 支援 4 種單一型態，包含 integer (整數)、Float-Point Number (浮點數)、Booleans (布林值)、與 Character (字元)。
+Rust 支援 4 種單一型態，包含 $${\color{red}integer}$$ (整數)、Float-Point Number (浮點數)、Booleans (布林值)、與 Character (字元)。
 
-#### Integer
+#### $${\color{red}Integer}$$
 
 整數是一種不包含小數的數值型態。Rust 的整數型態可以依據數值大小與是否需要包含正負符號 (signed)，有多種型態可供選擇。其中架構依據處理器是 32 位元或是 64 位元，預設為 32-bit 或是 64-bit。
 
