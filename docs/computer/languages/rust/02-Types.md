@@ -7,7 +7,7 @@ Rust 的型態系統有以下特點：
 - 靜態型態 (statically typed)
     - 變數的型態在編譯間就必須確定
         - 編譯器會依照我們賦予變數的值與使用的方式推導
-		- 為了避免誤會，在宣告變數時最好加上資料型態
+        - 為了避免誤會，在宣告變數時最好加上資料型態
 - 預設變數的值是**不可變** (**immutable**)
     - 當變數賦予值之後，將不能重新賦值
 
@@ -17,7 +17,7 @@ Rust 的型態系統有以下特點：
 let [mut] ${NAME}[: ${TYPE}][ = ${VALUE}]
 ```
 
-Rust 支援許多資料型態，除了數值 (整數與浮點數)、布林 (Boolean)、與字元 (Char) 這些簡易的資料型態，也包含元 (Tuple) 與陣列 (Array) 這種複合型態。這些資料型態的共同之處在於資料長度是固定的，且大小可以輕易的塞進 Stack；即便是元或是陣列，依舊可以將各欄位或是各筆紀錄視為單一資料塞入 Stack。除了這些基本資料型態之外，Rust 也支援客製化的資料型態，像是結構 (struct)、字串 (string)、PebbleBeach_L6_Agora_BFT_Plan.py-ORI等長度不等
+Rust 支援許多資料型態，除了數值 (整數與浮點數)、布林 (Boolean)、與字元 (Char) 這些簡易的資料型態，也包含元 (Tuple) 與陣列 (Array) 這種複合型態。這些資料型態的共同之處在於資料長度是固定的，且大小可以輕易的塞進 Stack；即便是元或是陣列，依舊可以將各欄位或是各筆紀錄視為單一資料塞入 Stack。除了這些基本資料型態之外，Rust 也支援客製化的資料型態，像是結構 (struct)、字串 (string)、等長度不等的
 
 ## Stack 與 Heap
 
@@ -34,9 +34,9 @@ fn by_ref( x: &i32 ) -> i32 {
 
 fn main() {
     let i = 10;
-	let res1 = by_ref( &i );
-	let res2 = by_ref( &41 );
-	println!( "{} {}", res1, res2 );
+    let res1 = by_ref( &i );
+    let res2 = by_ref( &41 );
+    println!( "{} {}", res1, res2 );
 }
 
 output = 11 42
