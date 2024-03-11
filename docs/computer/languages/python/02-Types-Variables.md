@@ -47,6 +47,12 @@ Python 在 Object 中使用 reference count 管理記憶體。當 Object 中的 
 
 簡而言之，任何變數指向的 Object 內容都不能改，但是 Object 另外指向的 Object 內容是可以更改的；例外是元，元儲存的 Object 的位置。而該 Object 又指向實際值儲存的位置。但是 Python 不讓人修改元裡面的內容。
 
+![Immutable](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/acc8813f-bcb9-4032-8ed6-b6e4538fb815)
+Figure 1. Immutable 型態
+
+![Mutable](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/7277465d-265e-4dfc-9fc5-084706b906c2)
+Figure 2. Mutable 型態
+
 ### 遮蔽 Shadowing
 
 其他語言的全域變數可以被任何子 scope 存取，但是對 Python 而言，子 scope 並不認識全域變數；要讓子 scope 存取全域變數，必須先在子 scope 中宣告全域變數
@@ -56,13 +62,13 @@ gVar = 100
 gTest = 0
 
 def func():
-    global gVar                  #    Need to declare global variable before accessing it
+    global gVar                      #    Need to declare global variable before accessing it
 	print( f'gVar = {gVar}' )    #    If you don't declare global before accessing it, you will get an error
-    gTest = 100                  #    gTest is local variable, and it will be destroyed after exiting this scope
+    gTest = 100                      #    gTest is local variable, and it will be destroyed after exiting this scope
 
 
 func()
-print( f'gTest = {gTest}' )      #    Result still be 0
+print( f'gTest = {gTest}' )          #    Result still be 0
 ```
 
 Python 允許在函數中包含子函數。在子函數如果要存取父函數中的變數，亦要先宣告；因為父函數中的變數不是全域變數，所以 keyword 不再是 global 而是 nonlocal。
@@ -76,7 +82,7 @@ def func():
 
 		var1 *= 10
 
-    print( f'var1 = {var1}' )    #    Result will be 1000
+    print( f'var1 = {var1}' )        #    Result will be 1000
 ```
 
 Python 搜尋變數的規則是 local --> nonlocal --> global --> build-in。幫變數取名需要注意，避免遮蔽了要使用的變數。另外，當存取 global 或是 nonlocal 變數都需要注意，可能會導致其他程式碼的行為錯誤；建議是改用 class 的方式
