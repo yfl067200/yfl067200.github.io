@@ -30,7 +30,7 @@ same( T1, Ref )
 
 ```
 Output:
-```
+
 same value and same object
 same value and same object
 same value and same object
