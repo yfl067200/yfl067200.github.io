@@ -45,12 +45,14 @@ Python 在 Object 中使用 reference count 管理記憶體。當 Object 中的 
 
 在 Python 中所謂的 Mutable 是指可以修改記憶體中 Object 所儲存的值，而 Immutable 是指需要建立一個新的 object 才能改變變數的值。屬於 Immutable 的資料型態包含整數 (Integer)、浮點數 (Float)、字串 (String)、與元 (tuple)，而 mutable 的型態包含列 (List)、集合 (Set)、與目錄 (Dictionary) 等。
 
-簡而言之，任何變數指向的 Object 內容都不能改，但是 Object 另外指向的 Object 內容是可以更改的；例外是元，元儲存的 Object 的位置。而該 Object 又指向實際值儲存的位置。但是 Python 不讓人修改元裡面的內容。
+簡而言之，任何變數指向的 Object 內容都不能改，但是 Object 另外指向的 Object 內容是可以更改的；例外是元，元儲存的 Object 的位置。而該 Object 又指向實際值儲存的位置。但是 Python 不讓人修改元裡面的內容。下圖中的 Frames 中的變數與值可以視為變數指向儲存值 (object) 的位置，可以從 output 的 ID 判斷
 
-![Immutable](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/acc8813f-bcb9-4032-8ed6-b6e4538fb815)
+![Immutable](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/9075ea26-9d83-4aae-a55d-0d1e2932ae65)
+
 Figure 1. Immutable 型態
 
 ![Mutable](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/7277465d-265e-4dfc-9fc5-084706b906c2)
+
 Figure 2. Mutable 型態
 
 ### 遮蔽 Shadowing
