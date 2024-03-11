@@ -32,6 +32,11 @@ same( T1, Ref )
 
 Figure 2-1. Python 變數、值、與記憶體的關係
 
+![variables](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/5db1efc7-1679-4d54-8e3e-38dba0f596f3)
+
+Figure 2-2. Python 中透過 copy constructor 建立物件需要特別注意，不然有可能是指向相同的 object。本還想建立 3 * 3 的陣列，結果只有 3 * 1 的介面，其他兩個只是 reference 到第一行
+
+
 Python 在 Object 中使用 reference count 管理記憶體。當 Object 中的 reference count 歸零之後，就會被清除。
 
 ### Immutable 與 Mutable
@@ -42,11 +47,11 @@ Python 在 Object 中使用 reference count 管理記憶體。當 Object 中的 
 
 ![Immutable](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/9075ea26-9d83-4aae-a55d-0d1e2932ae65)
 
-Figure 2-2. Immutable 型態
+Figure 2-3. Immutable 型態
 
 ![Mutable](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/7277465d-265e-4dfc-9fc5-084706b906c2)
 
-Figure 2-3. Mutable 型態
+Figure 2-4. Mutable 型態
 
 ### 遮蔽 Shadowing
 
