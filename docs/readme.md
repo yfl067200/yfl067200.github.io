@@ -4,6 +4,7 @@ This is my study notes
 
 ## Languages
 
+- [Python](./computer/languages/python/toc.md)
 - [Rust](./computer/languages/rust/toc.md)
 
 
