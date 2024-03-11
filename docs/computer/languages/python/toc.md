@@ -12,7 +12,7 @@
     - [進階資料型態](./02-Types-Advenced_Data_Types.md)
     - [變數](./02-Types-Variables.md)
 	    - Immutable 與 Mutable
+		- Shadow copy 與 Deep copy
 	    - 遮蔽
-- [03. 擁有權](./03-Ownership.md)
-- [04. 函式與流程控制](./04-Functions_Flowcontrol.md)
+- [03. 函式與流程控制](./03-Functions.md)
 

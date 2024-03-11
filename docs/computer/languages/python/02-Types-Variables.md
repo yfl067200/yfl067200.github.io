@@ -32,12 +32,8 @@ same( T1, Ref )
 
 Figure 2-1. Python 變數、值、與記憶體的關係
 
-![variables](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/5db1efc7-1679-4d54-8e3e-38dba0f596f3)
-
-Figure 2-2. Python 中透過 copy constructor 建立物件需要特別注意，不然有可能是指向相同的 object。本還想建立 3 * 3 的陣列，結果只有 3 * 1 的介面，其他兩個只是 reference 到第一行
-
-
 Python 在 Object 中使用 reference count 管理記憶體。當 Object 中的 reference count 歸零之後，就會被清除。
+
 
 ### Immutable 與 Mutable
 
@@ -47,11 +43,23 @@ Python 在 Object 中使用 reference count 管理記憶體。當 Object 中的 
 
 ![Immutable](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/9075ea26-9d83-4aae-a55d-0d1e2932ae65)
 
-Figure 2-3. Immutable 型態
+Figure 2-2. Immutable 型態
 
 ![Mutable](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/7277465d-265e-4dfc-9fc5-084706b906c2)
 
-Figure 2-4. Mutable 型態
+Figure 2-3. Mutable 型態
+
+
+### Shadow Copy 與 Deep Copy
+
+因為 Python 的 Immutable 的機制，透過 copy constructor 建立物件需要特別注意，不然有可能是指向相同的 object。這在呼叫函式或是建立物件特別需要注意，不然可能會導致原本的變數的值被函式或是物件改變。
+
+![variables](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/5db1efc7-1679-4d54-8e3e-38dba0f596f3)
+
+Figure 2-4. 本想建立一個 3*3 的陣列；結果只有 3 * 1 的陣列，其他兩行只是 reference 到第一行
+
+透過 copy module 中的 copy() 函式，可以將變數 (shadow copy) 進行複製，如此一來就可以確保原本的變數不會意外被修改；但是 shadow copy 的問題是，他只能複製一層 (variable -> object)。當有多層 (variable -> object -> object) 的資料，shadow copy 就無能為力。這時需要透過 copy module 中的 deepcopy() 函式進行 deep copy，確保多層的資料都有複製。
+
 
 ### 遮蔽 Shadowing
 
