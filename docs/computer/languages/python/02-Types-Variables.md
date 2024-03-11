@@ -28,16 +28,9 @@ same( T0, Ref )
 same( T1, Ref )
 ```
 
-```
-Output:
+![image](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/92513ae3-2358-4d2c-9575-3abb8610631e)
 
-same value and same object
-same value and same object
-same value and same object
-Different values (43/42) and different objects: var1 = 281473201473072, var2 = 281473201473040
-Different values (43/42) and different objects: var1 = 281473201473072, var2 = 281473201473040
-same value and same object
-```
+Figure 2-1. Python 變數、值、與記憶體的關係
 
 Python 在 Object 中使用 reference count 管理記憶體。當 Object 中的 reference count 歸零之後，就會被清除。
 
@@ -49,11 +42,11 @@ Python 在 Object 中使用 reference count 管理記憶體。當 Object 中的 
 
 ![Immutable](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/9075ea26-9d83-4aae-a55d-0d1e2932ae65)
 
-Figure 1. Immutable 型態
+Figure 2-2. Immutable 型態
 
 ![Mutable](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/7277465d-265e-4dfc-9fc5-084706b906c2)
 
-Figure 2. Mutable 型態
+Figure 2-3. Mutable 型態
 
 ### 遮蔽 Shadowing
 
