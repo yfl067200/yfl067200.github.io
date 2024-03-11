@@ -1,0 +1,73 @@
+# 資料型態
+
+Python 是強型態的語言，亦即不能將不同型態的資料結合在一起；譬如說，字串跟整數就不能結合。但是 Python 是弱綁定，亦即你可以隨時將不同型態的資料綁定在同一個變數。再加上 Python 在宣告變數時，不需要指定資料型態。當賦予值的時候，Python 會自動綁定變數的資料型態。當不確定變數的資料型態為何，可以呼叫 type 函式，即可獲得變數當前的資料型態
+
+``` python
+#    declaring variable
+${VARIABLE}[ = ${VALUE}]
+
+#    data type of variable
+type( ${VARIABLE} )
+```
+
+## 變數
+
+[Python Tutor](https://pythontutor.com/visualize.html#mode=edit) 網站提供了視覺化的方式說明 Python 程式碼在記憶體上的運作。
+
+Python 在記憶體上建立 Object 儲存資料，而變數就想是 C 的指標，指向 Object 的位置。藉由這種方式，Python 才能實踐強型態與弱綁定的機制。對於 Python 而言，任何數值都會被當成 Object 儲存在記憶體中；每一個 Object 都有一個 ID，而變數儲存的是 Object 的位置。當改變變數的值時，Python 不是跟其他語言一樣，將變數指向位置的內容改變；Python 是將變數儲存新資料 (Object) 所在的位置。Python 提供一個名為 id 的函式，可以查看變數指向的 Object ID。
+
+``` python
+def same( var1, var2 ):
+    if var1 == var2 and var1 is var2:
+        print( f"same value and same object" )
+    elif var1 == var2 and not var1 is var2:
+        print( f"same value but different objects: var1 = {id(var1)}, var2 = {id(var2)}" )
+    elif not var1 == var2 and var1 is var2:
+        print( f"Different values ({var1}/{var2})but same object" )
+    else:
+        print( f"Different values ({var1}/{var2}) and different objects: var1 = {id(var1)}, var2 = {id(var2)}" )
+
+T0 = 42
+T1 = 42
+Ref = T0
+same( T0, T1 )
+same( T0, Ref )
+same( T1, Ref )
+
+T0 = 43
+same( T0, T1 )
+same( T0, Ref )
+same( T1, Ref )
+```
+
+```
+Output:
+```
+same value and same object
+same value and same object
+same value and same object
+Different values (43/42) and different objects: var1 = 281473201473072, var2 = 281473201473040
+Different values (43/42) and different objects: var1 = 281473201473072, var2 = 281473201473040
+same value and same object
+```
+
+Python 在 Object 中使用 reference count 管理記憶體。當 Object 中的 reference count 歸零之後，就會被清除。
+
+### Shadowing
+
+其他語言的全域變數可以被任何子 scope 存取，但是對 Python 而言，子 scope 並不認識全域變數；要讓子 scope 存取全域變數，必須先在子 scope 中宣告全域變數
+
+``` python
+gVar = 100
+gTest = 0
+
+def test():
+    global gVar                  #    Need to declare global variable before accessing it
+	print( f'gVar = {gVar}' )    #    If you don't declare global before accessing it, you will get an error
+    gTest = 100                  #    gTest is local variable, and it will be destroyed after exiting this scope
+
+
+test()
+print( f'gTest = {gTest}' )      #    Result still be 0
+```
+
