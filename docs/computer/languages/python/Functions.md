@@ -28,6 +28,7 @@ Functional programming 跟 Procedural programming 的差異在於 Functional pro
 在 Python 中的 Recurion 是有限度的；如果深度超過 997，Python 會停下來，並發出 RecursionError。如果需要增加 Recursion 的深度，可以透過 sys.setrecursionlimit( N ) 函式調整。但是，當 Recusion 的深度過深，很可能導致 Stack 的資料覆蓋掉 Heap 的資料，導致系統崩潰。
 
 
+
 ## 參數的傳遞
 
 在[變數](./02-Types.html)一節，我們有解釋 Python 的變數是儲存值所在的記憶體位置，而參數也如同變數一般。簡單的說，函式中的參數是類似 call by reference 的方式傳遞的。但是因為 python 的變數有 [immutable 與 mutable](./02-Types-Variables.html#immutable-%E8%88%87-mutable) 的差異，即便是 call by reference，也有可能導致參數與原本變數的值不同。
