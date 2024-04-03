@@ -47,7 +47,7 @@ same( T1, Ref )
 
 Figure 2-1. Python 變數、值、與記憶體的關係
 
-Python 在 Object 中使用 reference count 管理記憶體。當 Object 中的 reference count 歸零之後，就會被清除。
+Python 在 Object 中使用 reference count 管理記憶體。當 Object 中的 reference count 歸零之後，就會被清除。變數名稱可以包含字元跟數字
 
 
 ### Immutable 與 Mutable
@@ -110,3 +110,94 @@ def func():
 
 Python 搜尋變數的規則是 local --> nonlocal --> global --> build-in。幫變數取名需要注意，避免遮蔽了要使用的變數。另外，當存取 global 或是 nonlocal 變數都需要注意，可能會導致其他程式碼的行為錯誤；建議是改用 class 的方式
 
+## 內建型態
+
+### 數字
+
+透過 type( 變數 ) 函式可以得到 int 型態 (整數) 或是 float 型態 (非整數)。
+
+不管是何種型態，數字類的變數都可以使用四則運算符號 (+-*/)；除法使用 **/** 運算符一定會得到 float 型態的值，可以改用 **//** 運算符得到 int 型態，但是是無條件去到小數位的值。
+
+| 運算符號 | 說明 |
+|:---------|:-----|
+| + | 加法 |
+| - | 減法 |
+| * | 乘法 |
+| ** | 倍數 |
+| / | 除法，得到包含小數位的商 (float 型態) |
+| // | 除法，只得到整數值的商，小數位無條件捨去 (int 型態) |
+| % | 除法，得到餘數 |
+
+### 字串
+
+透過 type( 變數 ) 函式可以得到 str 型態。
+
+Python 可以使用單引號 **'...'** 或是雙引號 **"..."** 表示字串；兩者沒有差別，只是如果資料中單引號或是雙引號時，可以使用另一種標示字串，省去在內容中使用 **\'** 或是 **\"**。如果不想讓內容中的 **\** 被當作特殊符號，可以在單引號或是雙引號前加上 **r**
+
+``` python
+>>> print( 'c:\test' )
+c:	est
+
+>>> print( r'c:\test' )
+c:\test
+```
+
+如果內容要多行呈現，可以使用 **\n** 表示換行；但是 python 也提供使用 3 個單引號 **'''...'''** 或是 3 個雙引號 **"""..."""** 的方式處理多行。另外，在程式碼中也可以用這種方式進行多行註解。
+
+``` python
+print("""\
+Usage: thingy [OPTIONS]
+     -h                        Display this usage message
+     -H hostname               Hostname to connect to
+""")
+```
+
+| 運算符號 | 說明 |
+|:---------|:-----|
+| + | 兩字串結合 |
+| * | 字串進行複製 |
+| [M] | 存取字串中第 N 個字元，從 0 開始 </p> 如果 N 是負數，則是反向第 N 個字元 |
+| [M:N] | 存取字串中第 M 個字元開使的 N 個字元 </p> 如果 M 為空，表示從頭開始 </p> 如果 N 為空，表示到底 <p> 如果 M 為負值，則是反向第 M 個字元開始，往字尾 N 個字元 |
+| [M:N:O] | 規則同上，只是間隔 O 個字元取樣一次 |
+
+使用 **[M:N:O]** 運算符時，如果超出字串內容，會從頭繼續算，不會有超出範圍的問題。此外，字串在 python 是 immutable 的，所以不可使用 **[]** 運算元修改某個字元
+
+### List 
+
+Python 有支援幾種結合資料的型態，其中一個就是 list。建立 list 的方式就是使用中括弧 **[]**，各資料間使用逗號分隔；每一個資料的型態，不必相同。如下例
+
+``` python
+>>> squares = [ 1, 3, 5, 7, 9, "EOL" ]
+
+#    兩個 list 合併
+>>> squares + [ 2, 4, 6, 8 ]
+
+#    Item 數量
+>>> len( squares )
+10
+
+#    多重 list 
+>>> multi-lists = [ [ 1, 3, 5, 7, 9 ], [ 2, 4, 6, 8 ], [ 'A', 'a' ] ]
+
+>>> mulit-lists.append( "EOL" )			#    在 list 中加上新的 item
+```
+
+List 跟字串一樣，可以透過 **[M:N:O]** 運算符存取內涵的資料。跟字串不同的地方在於，list 是 mutable，所以可以透過 **[M:N:O]**修改某一個/群 item 的值。
+
+指派 list 給另一個變數，就類似 C 中的指派位置給另一個指標，兩個 list 變數都指向同一組 object；當透過某一個變數修改 list 中的某一個值，可以透過另一個變數看到。Pyhton 對 list 進行深度複製的方式是透過 **[M:N:O]** 運算符
+
+``` python
+>>> rgb = [ "Green", "Red", "Blue" ]
+>>> rgba = rgb
+>>> rgba.append( "Alph" )
+>>> print( rgb )
+[ "Green", "Red", "Blue", "Alph" ]
+
+>>> rgbb = rgb[:]		#    深層複製
+>>> rgbb[3] = "Alpha"
+>>> print( rgb )
+[ "Green", "Red", "Blue", "Alph" ]
+
+>>> print( rgbb )
+[ "Green", "Red", "Blue", "Alpha" ]
+```
