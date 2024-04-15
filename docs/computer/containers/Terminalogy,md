@@ -1,0 +1,41 @@
+[[_TOC_]]
+
+# 常見名詞
+
+
+## Container runtime
+
+Container runtime，或是 contrainer engine，就是在 host 上執行 containers 的程式。
+
+### Low-level runtime
+
+底層的 runtime 負責執行 containers，目前的主流是 runC 或是 crun；runC 是由 Docker 或是 Open Container Initiative (OCI) 提供，算是業界的標竿。而 crun 是 Red Hat 建造的，擁有比 runC 更快且需求的資源更少的優勢。
+
+執行底層的 runtime，需要一個目錄，裡面包含了要執行的程式與其所需的檔案；這個目錄下擁有類似 Linux 檔案系統。
+
+### High-level runtime
+
+頂層的 runtime 通常會包含符合 OCI 發布的 Container Runtime Interface (CRI) 標準，目前常見的包含 Docker、CRI-O、與 Windows 的 Hyper-V。CRI 標準定義了如何將 container runtime 整合進 container orchestration (譬如說 Kubernetes) 的規則。
+
+Docker container runtime 在 2016 成為主流。Red Hat 的 ORI-O 是為了 Kubernetes orchestrator 而建立的，為的是在 OCI 相容的底層 runtime 執行 containers。
+
+
+## Container orchestrators
+
+執行 container 需要 container runtime，目前所提到的都只是在一台機器上。當你需要在多台機器上運行你的 containers，就面臨硬體、作業系統、或是工具與 library 等等影響到 containers 運作的問題。Container orchestrators 將會管理多台機器
+
+目前主流是 Kerbunetes 與 Docker Swarm，
+
+
+## Container images
+
+
+
+## Container
+
+
+
+
+
+t
+
