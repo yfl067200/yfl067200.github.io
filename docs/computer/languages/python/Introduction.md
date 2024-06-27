@@ -1,11 +1,12 @@
 # Introduction
 
+Python 是一種解釋型語言 (interpreted language)；他不需要先經過編譯器轉換成機器碼，反之是透過直譯器 (interpreter) 一行行將程式碼進行解釋並直接執行。
 
-## 安裝
+# 安裝
 
 在 Linux 環境下，可以透過套件管理工具安裝 Python；常見的就是 Debian 家族的 apt 或是 redhat 家族的 dnf。而在 Windows 下，可以透過 Microsoft Store 安裝 Python。理論上透過上述方式，就可以直接執行 python。
 
-### 環境變數
+## 環境變數
 
 | 名稱 | 說明 |
 |:-----|:-----|
@@ -18,7 +19,7 @@
 
 而 Windows 環境下，可能需要自行將 Python 的路徑加入 PATH 環境參數；比較建議建立一個空的目錄，將該目錄加入 PATH 環境變數。如此一來就可以在該目錄下，透過建立捷徑鏈結到不同版本的 python 檔。
 
-## Interpreter
+## Interpreter (直譯器)
 
 安裝完 Python 之後，就可以執行命令 python 進入 python interpreter 中進行簡易的 python 程式碼測試。
 
