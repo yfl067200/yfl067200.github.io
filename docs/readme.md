@@ -10,4 +10,6 @@ This is my study notes
 
 - [Rust](./computer/languages/rust/toc.md)
 
+## Framework
 
+- [OpenBMC](./computer/framework/OpenBMC/readme.md)

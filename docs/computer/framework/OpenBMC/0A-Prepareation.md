@@ -21,3 +21,17 @@
 | FindBin | perl-FindBin |
 >>>
 
+2. PermissionError
+
+在新的 ubuntu (24.04) 因為 apparmor 的關係，導致 bitbake 編譯會有問題。
+
+解決方案是建立一個 bitbake 的 apparmor 檔案 (/etc/apparmor.d/local/bitbake)
+```
+abi <abi/4.0>,
+
+include <tunables/global>
+
+/home/**/bitbake/bin/bitbake flags=(unconfined) {
+        userns,
+}
+```
