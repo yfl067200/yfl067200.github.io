@@ -1,8 +1,13 @@
 # Introduction
 
-argparse 模組是用來解析 (parse) 命令列參數。本模組的核心物件是 ArgumentParser，本物件提供幾個 API 供使用者進行客製化解析命令列，方便找出命令列中的 **變數** 與 **值**。
+argparse 模組是用來解析 (parse) 命令列參數。本模組的核心物件是 ArgumentParser，本物件提供幾個 API 供使用者進行客製化解析命令列，方便找出命令列中的 **變數** 與對應的 **值**。
 
-命令列中的參數會被分成兩類，一類是 optional 變數，另一類是 positional 變數；其中 optional 變數開頭主要為 '-' 或是 '--'，其後面接的參數未必是該變數的值；本模組後面描述到的客製化規則主要就是來處理 optional 變數。經處理 Optional 變數後，剩下的命令列參數將被歸為 positional 變數的值；一旦在 parsing 規則加上 positional 變數，命令列必須提供對應的值，不然將會視為錯誤
+命令列中的參數會被分成兩類 **變數**，一類是 optional 變數，另一類是 positional 變數：
+
+| 變數類別 | 賦予方式 | 說明 |
+|:---------|:---------|:-----|
+| Optional 變數 | 比對名稱 | 比對命令列參數與變數名稱，相符的參數將只配給 Optional 變數 <br> 變數名稱多以 '-' 或是 '--' 起始。這個 prefix char 可以客製化 <br> 命令列中不需要有這些變數 |
+| Positional 變數 | 依照順序 | 命令列中，不屬於 Optional 變數的參數，將依照加入客製化規則的順序指派為 Positinal 變數 <br> 所有 Positional 變數都應該在命令列中出現 |
 
 
 ## 使用方式
@@ -25,14 +30,33 @@ data = parser.parse_args( ... )			#    data 為 argparse.Namespace 物件
 
 ## 解析結果 (argparse.Namespace)
 
-當解析完命令列之後，ArgumentParser 會返回一個 argparse.Namespace 的物件。該物件會包含可讀的文字描述，基本上跟命令列相差無幾。使用上比較好的做法是，透過 vars() 函式，將 argparse.Namespace 物件轉變成 dict-like 型態的資料。
+當解析完命令列之後，ArgumentParser 會返回一個 argparse.Namespace 的物件。該物件會包含可讀的文字描述，資訊會保留在該物件的 __dict__ 中。可以透過 args.foo 的方式讀取 args 這個 argparse.Namespace 物件中，名為 foo 變數的值。要取得在 argparse.Namespace 物件中所有的 Key，可以使用 vars() 函式將 argparse.Namespace 傳換成 dict-like 的資料型態
 
 ``` python3
 >>> parser = argparse.ArgumentParser()
 >>> parser.add_argument('--foo')
 >>> args = parser.parse_args(['--foo', 'BAR'])
->>> vars(args)
-{'foo': 'BAR'}
+>>> print( f'foo = {args.__dict__[ "foo" ]}' )
+foo = BAR
+
+>>> print( f'foo = {args.foo}' )
+foo = BAR
+
+>>> data = vars(args)					#	Dictionary
+>>> print( f'data = {data}' )
+data = { 'foo', 'BAR' }
+
+>>> print( f'foo = {data[ "foo" ]}' )
+foo = BAR
+
+>>> for i in data:
+>>>    print( f'data = {i}' )
+data = foo
+
+>>> value = vars( args ).values()		#	Only Values
+>>> for i in value:
+>>>     print( f'value = {i}' )
+value = BAR
 ```
 
 另一種作法是解析的結果置於一個以建立的物件，再透過該物件獲得各變數的值
@@ -55,7 +79,7 @@ data = parser.parse_args( ... )			#    data 為 argparse.Namespace 物件
 ArgumentParser 的 constructor 宣告為
 ``` python3
 class argparse.ArgumentParser(
-    prog = None,                                   #	執行的程式名稱，預設是 os.path.basename( sys.argv[ 0 ] )
+	prog = None,                                   #	執行的程式名稱，預設是 os.path.basename( sys.argv[ 0 ] )
 	usage = None,                                  #	說明如何使用，預設將從客製化規則自動生成
 	description = None,                            #	會被置於說明中的一個部分，通常會出現在 `options` 項目之前
 	epilog = None,                                 #	會被置於說明中的最後一個部分
@@ -85,21 +109,12 @@ Parents 的規則可能會有重複 key，導致解析的方式錯亂，需要�
 
 設定顯示說明 (Help) 資訊的格式。有四種選項；
 
-- argparse.RawDescriptionHelpFormatter
-
-預設的顯示方式會自動對 description 與 epilog 的文字進行縮排，使用者無法定義縮排方式。本模式將改用使用者定義的縮排方式
-
-- argparse.RawTextHelpFormatter
-
-如同上面的 argparse.RawDescriptionHelpFormatter，本模式會保留使用者定義的空白等。但是會將多行空白行變成一行
-
-- argparse.ArgumentDefaultsHelpFormatter
-
-類似預設模式，但是會將各變數的預設值列出
-
-- argparse.MetavarTypeHelpFormatter
-
-類似預設模式，但是會將各變數的型態列出
+| 格式 | 說明 |
+|:-----|:-----|
+| argparse.RawDescriptionHelpFormatter | 預設的顯示方式會自動對 description 與 epilog 的文字進行縮排，使用者無法定義縮排方式。本模式將改用使用者定義的縮排方式 |
+| argparse.RawTextHelpFormatter | 如同上面的 argparse.RawDescriptionHelpFormatter，本模式會保留使用者定義的空白等。但是會將多行空白行變成一行 |
+| argparse.ArgumentDefaultsHelpFormatter | 類似預設模式，但是會將各變數的預設值列出 |
+| argparse.MetavarTypeHelpFormatter | 類似預設模式，但是會將各變數的型態列出 |
 
 
 ## prefix_chars
@@ -115,7 +130,7 @@ Parents 的規則可能會有重複 key，導致解析的方式錯亂，需要�
 
 ## fromfile_prefix_chars
 
-如果命令列太長，可以將其變成檔案。透過指定開頭字符，ArgumentParser 會將某些命令參數是為讀取檔案，並進行 parse 的動作。以下範例為讀取 args.txt 檔案，並解析之
+如果命令列參數太長，可以將其變成檔案。透過指定開頭字符，ArgumentParser 會將某些命令參數是為讀取檔案，並進行 parse 的動作。以下範例為讀取 args.txt 檔案，並解析之
 
 ``` python3
 >>> parser = argparse.ArgumentParser(fromfile_prefix_chars='@')
@@ -160,26 +175,26 @@ options:
 
 ``` python3
 ArgumentParser.add_argument(
-	name or flags...			#	變數的名稱。譬如說 foo 或是 -f, --foo
-	[, action]					#
-	[, nargs]					#	const 或是 default 參數需搭配此參數才能產生效果
-	[, const]					#	在命令列中找到變數卻沒有找到對應的值，將用此數值作為該變數的值 (預設是 None)
-	[, default]					#	在命令列中沒有找到變數，將會自行建立該變數，且賦予此值 (預設是 None)
-	[, type]					#
-	[, choices]					#	列出變數可接受的值，可使用 list 等 sequences 結構，包含 range()
-	[, required]				#	用於表示 Optional 變數必須在命令列中
-	[, help]					#	該參數的說明，會自動加入說明描述
-	[, metavar]					#	在說明文件中表示變數值的文字
-	[, dest]					#
+	name or flags               #	變數的名稱。譬如說 foo 或是 -f, --foo
+	[, action]                  #
+	[, nargs]                   #	const 或是 default 參數需搭配此參數才能產生效果
+	[, const]                   #	在命令列中找到變數卻沒有找到對應的值，將用此數值作為該變數的值 (預設是 None)
+	[, default]                 #	在命令列中沒有找到變數，將會自行建立該變數，且賦予此值 (預設是 None)
+	[, type]                    #
+	[, choices]                 #	列出變數可接受的值，可使用 list 等 sequences 結構，包含 range()
+	[, required]                #	用於表示 Optional 變數必須在命令列中
+	[, help]                    #	該參數的說明，會自動加入說明描述
+	[, metavar]                 #	在說明文件中表示變數值的文字
+	[, dest]                    #
 )
 ```
 
 
 ## name 與 flags
 
-必須是該函式第一個參數。如果有 `prefix char` 開頭 (optional 變數)，可以列出多個參數 (flags)；這些參數中，剔除掉 `prefix char` 之後，最長的名稱將成為 optional 變數的名稱。
+必須是該函式第一個參數。如果有 `prefix char` 開頭 (optional 變數)，可以列出多個參數 (flags)；這些參數中，剔除掉 `prefix char` 之後，最長的名稱將成為 optional 變數的名稱；Optional 變數的名稱中的 '-' 字符將被換成 '_' 字符
 
-如果沒有 `prefix char`，則只會將第一個參數視為 position 變數的名稱。第二個之後的參數會被視 add_argument() 函式中其他參數。
+如果沒有 `prefix char`，則只會將第一個參數視為 positional 變數的名稱。第二個之後的參數會被視 add_argument() 函式中其他參數。
 
 ``` python3
 >>> parser = argparse.ArgumentParser()
