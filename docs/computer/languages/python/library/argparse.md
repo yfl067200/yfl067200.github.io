@@ -1,32 +1,33 @@
 ##### Table of Contents  
-- [Introduction]()
+- [Introduction](./argparse.html#introduction)
     - [使用流程](./argparse.html#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F)
-- [建立 Parser]() 
+- [建立 Parser](./argparse.html#%E5%BB%BA%E7%AB%8B-parser) 
     - [parents 參數](./argparse.html#parents)
 	- [formatter_class 參數](./argparse.html#formatter_class)
 	- [prefix_char 參數](./argparse.html#prefix_chars)
 	- [fromfile_prefix_chars](./argparse.html#fromfile_prefix_chars)
-	    - [客製化檔案解析機制]()
+	    - [客製化檔案解析機制](./argparse.html#%E5%AE%A2%E8%A3%BD%E5%8C%96%E6%AA%94%E6%A1%88%E8%A7%A3%E6%9E%90%E6%A9%9F%E5%88%B6)
 	- [conflict_handler](./argparse.html#conflict_handler)
 	- [exit_on_error](./argparse.html#exit_on_error)
-- [客製化 Parsing 規則]()
+	    - [錯誤處理機制](./argparse.html#%E9%8C%AF%E8%AA%A4%E8%99%95%E7%90%86%E6%A9%9F%E5%88%B6)
+- [客製化 Parsing 規則](./argparse.html#%E5%AE%A2%E8%A3%BD%E5%8C%96-parsing-%E8%A6%8F%E5%89%87)
     - [Name 與 Flags 參數](./argparse.html#name-%E8%88%87-flags)
     - [action 參數](./argparse.html#action)
     - [nargs 參數](./argparse.html#nargs)
     - [metaver 與 dest 參數](./argparse.html#metavar-%E8%88%87-dest)
-- [Parsing 命令列]()
+- [Parsing 命令列](./argparse.html#parsing-%E5%91%BD%E4%BB%A4%E5%88%97)
     - [解析的問題](./argparse.html#%E8%A7%A3%E6%9E%90%E7%9A%84%E5%95%8F%E9%A1%8C)
     - [Optional 變數](./argparse.html#optional-%E8%AE%8A%E6%95%B8)
         - [精簡化命令列參數](./argparse.html#%E7%B2%BE%E7%B0%A1%E5%8C%96%E5%91%BD%E4%BB%A4%E5%88%97%E5%8F%83%E6%95%B8)
 	    - [模擬兩可的 optional 變數縮寫](./argparse.html#%E6%A8%A1%E6%93%AC%E5%85%A9%E5%8F%AF%E7%9A%84-optional-%E8%AE%8A%E6%95%B8%E7%B8%AE%E5%AF%AB)
 	- [解析結果 (argparse.Namespace)](./argparse.html#%E8%A7%A3%E6%9E%90%E7%B5%90%E6%9E%9C-argparsenamespace)
-- [進階議題]()
+- [進階議題](./argparse.html#%E9%80%B2%E9%9A%8E%E8%AD%B0%E9%A1%8C)
     - [子命令](/argparse.html#%E9%9A%8E%E7%B4%9A%E5%8C%96%E7%9A%84%E5%91%BD%E4%BB%A4)
-	- [檔案物件]()
+	- [檔案物件](./argparse.html#%E6%AA%94%E6%A1%88%E7%89%A9%E4%BB%B6)
     - [變數 group](./argparse.html#group)
-	    - [互斥]()
-	- [Parser 的預設值]()
-	- [混用式命令列參數]()
+	    - [互斥群組](./argparse.html#%E4%BA%92%E6%96%A5%E7%BE%A4%E7%B5%84)
+	- [Parser 的預設值](./argparse.html#parser-%E7%9A%84%E9%A0%90%E8%A8%AD%E5%80%BC)
+	- [混用式命令列參數](./argparse.html#%E6%B7%B7%E7%94%A8%E5%BC%8F%E5%91%BD%E4%BB%A4%E5%88%97%E5%8F%83%E6%95%B8)
 
 
 ## Introduction
@@ -54,7 +55,7 @@ parser = argparse.ArgumentParser( ... )
 #    客製化 Parsing 規則
 parser.add_argument( ... )
 
-#    Parsing 命令列
+#    Parsing 命令列參數
 data = parser.parse_args( ... )			#    data 為 argparse.Namespace 物件
 ```
 
@@ -62,6 +63,7 @@ data = parser.parse_args( ... )			#    data 為 argparse.Namespace 物件
 ## 建立 Parser
 
 ArgumentParser 的 constructor 宣告為
+
 ``` python3
 class argparse.ArgumentParser(
 	prog = None,                                   #	執行的程式名稱，預設是 os.path.basename( sys.argv[ 0 ] )
@@ -87,7 +89,7 @@ class argparse.ArgumentParser(
 
 透過將各 parsers 的實體放進 parents 參數中，即可將各 parsers 建立的規則納為己用。
 
-Parents 的規則可能會有重複 key，導致解析的方式錯亂，需要搭配另一個參數 `conflict_handler` 處理相關的錯誤 
+Parents 的規則可能會有重複 key words，導致解析的方式錯亂，需要搭配另一個參數 [`conflict_handler`](./argparse.html#conflict_handler) 處理相關的錯誤 
 
 
 ### formatter_class
@@ -162,6 +164,7 @@ options:
 ### exit_on_error
 
 如果解析的命令列有問題，預設將會中止程式 (exit_on_error = True)。將此參數設為 False，將會跳出 argparse.ArgumentError 的例外。可供開發人員進行例外處理
+
 
 #### 錯誤處理機制
 
@@ -298,7 +301,7 @@ argparse.Namespace = argparse.ArgumentParser.parse_known_args (
 以下為 Optional 變數的相關議題
 
 
-### 精簡化命令列參數
+#### 精簡化命令列參數
 
 一般來說，變數跟值是分開的兩個命令列參數。對於 optional 變數來說，對應 key word 參數的下一個參數就是該變數的值；對於 positional 變數來說，非 optional 變數的命令列參數，將依序賦值。對於 optional 變數來說，可以用同一個命令列參數表達參數與值。以下為相關的規則：
 
