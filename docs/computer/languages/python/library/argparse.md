@@ -1,7 +1,6 @@
 ##### Table of Contents  
 - [Introduction]()
-    -[使用方式](./argparse.html#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F)
-	-[解析結果 (argparse.Namespace)](./argparse.html#%E8%A7%A3%E6%9E%90%E7%B5%90%E6%9E%9C-argparsenamespace)
+    - [使用方式](./argparse.html#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F)
 - [建立 Parser]() 
     - [parents 參數](./argparse.html#parents)
 	- [formatter_class 參數](./argparse.html#formatter_class)
@@ -14,6 +13,16 @@
     - [action 參數](./argparse.html#action)
     - [nargs 參數](./argparse.html#nargs)
     - [metaver 與 dest 參數](./argparse.html#metavar-%E8%88%87-dest)
+- [Parsing 命令列]()
+    - [解析的問題]()
+    - [Optional 變數]()
+	    - [精簡化命令列參數]()
+		- [模擬兩可的 optional 變數縮寫]()
+	- [解析結果 (argparse.Namespace)](./argparse.html#%E8%A7%A3%E6%9E%90%E7%B5%90%E6%9E%9C-argparsenamespace)
+- [進階議題]()
+    - [Group 變數]()
+	- [客製化 action]()
+
 
 # Introduction
 
@@ -45,52 +54,6 @@ data = parser.parse_args( ... )			#    data 為 argparse.Namespace 物件
 ```
 
 
-## 解析結果 (argparse.Namespace)
-
-當解析完命令列之後，ArgumentParser 會返回一個 argparse.Namespace 的物件。該物件會包含可讀的文字描述，資訊會保留在該物件的 __dict__ 中。可以透過 args.foo 的方式讀取 args 這個 argparse.Namespace 物件中，名為 foo 變數的值。要取得在 argparse.Namespace 物件中所有的 Key，可以使用 vars() 函式將 argparse.Namespace 傳換成 dict-like 的資料型態
-
-``` python3
->>> parser = argparse.ArgumentParser()
->>> parser.add_argument('--foo')
->>> args = parser.parse_args(['--foo', 'BAR'])
->>> print( f'foo = {args.__dict__[ "foo" ]}' )
-foo = BAR
-
->>> print( f'foo = {args.foo}' )
-foo = BAR
-
->>> data = vars(args)					#	Dictionary
->>> print( f'data = {data}' )
-data = { 'foo', 'BAR' }
-
->>> print( f'foo = {data[ "foo" ]}' )
-foo = BAR
-
->>> for i in data:
->>>    print( f'data = {i}' )
-data = foo
-
->>> value = vars( args ).values()		#	Only Values
->>> for i in value:
->>>     print( f'value = {i}' )
-value = BAR
-```
-
-另一種作法是解析的結果置於一個以建立的物件，再透過該物件獲得各變數的值
-
-``` python3
->>> class C:
->>>    pass
-
->>> c = C()
->>> parser = argparse.ArgumentParser()
->>> parser.add_argument('--foo')
->>> parser.parse_args(args=['--foo', 'BAR'], namespace=c)
->>> c.foo
-'BAR'
-```
-
-
 # 建立 Parser
 
 ArgumentParser 的 constructor 宣告為
@@ -107,7 +70,7 @@ class argparse.ArgumentParser(
 	argument_default = None,                       #	
 	conflict_handler = 'error',                    #
 	add_help = True,                               #    是否加上 -h/--help 功能
-	allow_abbrev = True,                           #	在命令列中能否使用縮寫
+	allow_abbrev = True,                           #	在命令列中能否使用縮寫。建議設為 False，避免[模擬兩可的解析問題]()
 	exit_on_error = True                           #	是否在發生錯誤時
 )
 ```
@@ -252,7 +215,7 @@ nargs 後面接的值除了數字之外，還接受另外 3 種字符，分別�
 
 - `'?'`：因為 parser 預期將下一個命令列參數視為值。假若無法將下一個參數作為值，包含沒有下一個參數或是下一個參數是另一個 opetional 參數的字符，ArgumentParser 會將 `const` 參數指定的值視為該 optional 變數的值 (不包含 positional 變數)；如果連 `const` 參數也沒指定，那就會出現 parse 錯誤
 
-- `'*'`：當參數可以接受多個值，parser 會將變數之後的命令列參數，直到符合另一個變數字符，都變成該變數的值
+- `'*'`：當參數可以接受多個值，parser 會將變數之後的命令列參數都是為該變數的值，直到符合另一個符合變數的字符
 
 - `'+'`：同 `'+'`，唯一的差異是命令列中至少要有一個值
 
@@ -264,4 +227,151 @@ nargs 後面接的值除了數字之外，還接受另外 3 種字符，分別�
 本函式的第一個參數 Name 與 Flags 會作為變數的名稱，詳細規則請參考第一個參數的說明。如果想要客製化變數名稱，可以使用 `dest` 參數。使用 `dest` 參數將會改變在 `argparse.Namespace` 物件中，變數的名稱
 
 與 `dest` 參數不同，`metavar` 參數是用來表示變數值。用於說明文字中，幫助使用者提供易於理解的說明
+
+
+# Parsing 命令列
+
+當客製化 Parsing 的動作都完成之後，即可使用 ArgumentParser 物件進行命令列的解析。解析的函式 API 為
+
+``` python3
+argparse.Namespace = argparse.ArgumentParser.parse_args(
+    args = None             #    需要解析的字串，預設來自於 sys.argv 變數
+	namespace = None        #    解析完的資料所存放的
+)
+```
+
+
+## 解析的問題
+
+呼叫本函式之後，ArgumentParser 會進行解析的動作；包含了 positional 變數的數量是否正確，Optional 變數的解析是否沒有爭議等。解析的過程可能會出乎意料之外。以下為可能發生的爭議情況
+
+``` python3
+>>> parser = argparse.ArgumentParser()
+>>> parser.add_argument( "-x" )                #	Optional 變數，預設值是 None
+>>> parser.add_argument( "foo", nargs="?" )    #	Positional 變數，值會存放在 list 中。預設值為 None
+
+#	"-1" 可能是 Optional 變數的值，也可能是 Positional 變數的值
+>>> parser.parse_args( [ "-x", "-1" ] )
+
+#	"-1" 跟 "-5" 都不在 Optional 變數列表。故 "-1" 可能是 Optional 變數的值，而 "-5" 則是 Positional 變數的值
+>>> parser.parse_args( [ "-x", "-1", "-5" ] )
+```
+
+為了避免可能的爭議，在命令列中可以加上一個 **"--" 參數**。在 **"--" 參數**之後的所有參數都將被視為 **Positional 變數**
+
+
+## Optional 變數
+
+以下為 Optional 變數的相關議題
+
+
+### 精簡化命令列參數
+
+一般來說，變數跟值是分開的兩個命令列參數。對於 optional 變數來說，對應 key word 參數的下一個參數就是該變數的值；對於 positional 變數來說，非 optional 變數的命令列參數，將依序賦值。對於 optional 變數來說，可以用同一個命令列參數表達參數與值。以下為相關的規則：
+
+對於長度大於 1 的變數名稱，可以搭配 `--XX=值` 的方式將變數與值放在同一個參數中；長度為 1 的變數名稱，直接將值放在變數之後即可 (-xX = 變數 x 的值為 X)。甚至可以將多個長度為 1 的變數放在同一個命令列參數
+
+``` python3
+>>> parser = argparse.ArgumentParser(prog='PROG')
+>>> parser.add_argument('-x', action='store_true')
+>>> parser.add_argument('-y', action='store_true')
+>>> parser.add_argument('-z')
+>>> parser.parse_args(['-xyzZ'])
+Namespace(x=True, y=True, z='Z')
+```
+
+
+### 模擬兩可的 optional 變數縮寫
+
+ArgumentParser 再比對 optional 變數時，可以接受使用縮寫。舉個例子來說，在命令列中可以使用參數 `-bac` 表示 `bacon` 這個 optional 變數
+
+``` python3
+>>> parser.add_argument('-bacon')
+```
+
+雖然縮寫可以方便使用者，但是可能會造成解析時發生模擬兩可的狀況，導致解析出錯。為了避免這類的錯誤，在建立 Parser 時，可以提供參數 `allow_abbrev=False`
+
+``` python3
+>>> parser = argparse.ArgumentParser()
+>>> parser.add_argument('-bacon')
+>>> parser.add_argument('-badger')
+>>> parser.parse_args('-bac MMM'.split())     #	解析正常，變數 `bacon` 的值是 'MMM'
+>>> parser.parse_args('-bad Wood'.split())    #	解析正常，變數 `bagger` 的值是 'Wood'
+>>> parser.parse_args('-ba BA'.split())       #	解析失敗，無法判斷是變數 `bacon` 或是變數 `badger`
+```
+
+
+## 解析結果 (argparser.Namespace)
+
+當解析完命令列之後，ArgumentParser 會返回一個 argparse.Namespace 的物件。該物件會包含可讀的文字描述，資訊會保留在該物件的 __dict__ 中。可以透過 args.foo 的方式讀取 args 這個 argparse.Namespace 物件中，名為 foo 變數的值。要取得在 argparse.Namespace 物件中所有的 Key，可以使用 vars() 函式將 argparse.Namespace 傳換成 dict-like 的資料型態
+
+``` python3
+>>> parser = argparse.ArgumentParser()
+>>> parser.add_argument('--foo')
+>>> args = parser.parse_args(['--foo', 'BAR'])
+>>> print( f'foo = {args.__dict__[ "foo" ]}' )
+foo = BAR
+
+>>> print( f'foo = {args.foo}' )
+foo = BAR
+
+>>> data = vars(args)					#	Dictionary
+>>> print( f'data = {data}' )
+data = { 'foo', 'BAR' }
+
+>>> print( f'foo = {data[ "foo" ]}' )
+foo = BAR
+
+>>> for i in data:
+>>>    print( f'data = {i}' )
+data = foo
+
+>>> value = vars( args ).values()		#	Only Values
+>>> for i in value:
+>>>     print( f'value = {i}' )
+value = BAR
+```
+
+另一種作法是解析的結果置於一個以建立的物件，再透過該物件獲得各變數的值
+
+``` python3
+>>> class C:
+>>>    pass
+
+>>> c = C()
+>>> parser = argparse.ArgumentParser()
+>>> parser.add_argument('--foo')
+>>> parser.parse_args(args=['--foo', 'BAR'], namespace=c)
+>>> c.foo
+'BAR'
+```
+
+
+# 進階議題
+
+## 階級化的命令
+
+目前的趨勢是同一個命令下面有子命令，每個子命令又有各自的命令參數。像是 git 命令，他的子命令包含 `git clone`、`git pull` 等。為了處理這種狀況，argparse 模組提供了加入子 Parser 的功能。
+
+``` python3
+argparse.action = ArgumentParser.add_subparsers (
+	[title]               #	子 Parser 群組的名稱。
+	[, description]       #
+	[, prog]              #
+	[, parser_class]      #
+	[, action]            #
+	[, option_strings]    #
+	[, dest]              #
+	[, required]          #
+	[, help]              #
+	[, metavar]           #
+)
+```
+
+## Group
+
+
+## 客製化 Action
+
+
 
