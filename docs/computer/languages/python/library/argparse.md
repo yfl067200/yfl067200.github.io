@@ -65,20 +65,20 @@ data = parser.parse_args( ... )			#    data 為 argparse.Namespace 物件
 ArgumentParser 的 constructor 宣告為
 
 ``` python3
-class argparse.ArgumentParser(
-	prog = None,                                   #	執行的程式名稱，預設是 os.path.basename( sys.argv[ 0 ] )
-	usage = None,                                  #	說明如何使用，預設將從客製化規則自動生成
-	description = None,                            #	會被置於說明中的一個部分，通常會出現在 `options` 項目之前
-	epilog = None,                                 #	會被置於說明中的最後一個部分
-	parents = [],                                  #	將其他 ArgumentParser 的設定變成自己的設定
-	formatter_class = argparse.HelpFormatter,      #
-	prefix_chars = '-',                            #
-	fromfile_prefix_chars = None,                  #
-	argument_default = None,                       #	
-	conflict_handler = 'error',                    #
-	add_help = True,                               #    是否加上 -h/--help 功能
-	allow_abbrev = True,                           #	在命令列中能否使用縮寫。建議設為 False，避免[模擬兩可的解析問題]()
-	exit_on_error = True                           #	是否在發生錯誤時
+    class argparse.ArgumentParser(
+    prog = None,                                   #	執行的程式名稱，預設是 os.path.basename( sys.argv[ 0 ] )
+    usage = None,                                  #	說明如何使用，預設將從客製化規則自動生成
+    description = None,                            #	會被置於說明中的一個部分，通常會出現在 `options` 項目之前
+    epilog = None,                                 #	會被置於說明中的最後一個部分
+    parents = [],                                  #	將其他 ArgumentParser 的設定變成自己的設定
+    formatter_class = argparse.HelpFormatter,      #
+    prefix_chars = '-',                            #
+    fromfile_prefix_chars = None,                  #
+    argument_default = None,                       #	
+    conflict_handler = 'error',                    #
+    add_help = True,                               #	是否加上 -h/--help 功能
+    allow_abbrev = True,                           #	在命令列中能否使用縮寫。建議設為 False，避免[模擬兩可的解析問題]()
+    exit_on_error = True                           #	是否在發生錯誤時
 )
 ```
 
@@ -171,9 +171,9 @@ options:
 ``` python3
 class ArgumentParser
     def exit( self, status = 0, message = None ):    #	處理離開的機制。將回傳 status 的值，並列印出 message 的訊息
-	    if status:
-		    raise Exception( f'Exiting because of an error: {message}' )
-		exit( status )
+        if status:
+            raise Exception( f'Exiting because of an error: {message}' )
+        exit( status )
 
     def error( message ):                            #	將 status 設為 2，並觸發上述離開機制
 ```
@@ -185,17 +185,17 @@ class ArgumentParser
 
 ``` python3
 ArgumentParser.add_argument(
-	name or flags               #	變數的名稱。譬如說 foo 或是 -f, --foo
-	[, action]                  #
-	[, nargs]                   #	const 或是 default 參數需搭配此參數才能產生效果
-	[, const]                   #	在命令列中找到變數卻沒有找到對應的值，將用此數值作為該變數的值 (預設是 None)
-	[, default]                 #	在命令列中沒有找到變數，將會自行建立該變數，且賦予此值 (預設是 None)
-	[, type]                    #
-	[, choices]                 #	列出變數可接受的值，可使用 list 等 sequences 結構，包含 range()
-	[, required]                #	用於表示 Optional 變數必須在命令列中
-	[, help]                    #	該參數的說明，會自動加入說明描述
-	[, metavar]                 #	在說明文件中表示變數值的文字
-	[, dest]                    #
+    name or flags               #	變數的名稱。譬如說 foo 或是 -f, --foo
+    [, action]                  #
+    [, nargs]                   #	const 或是 default 參數需搭配此參數才能產生效果
+    [, const]                   #	在命令列中找到變數卻沒有找到對應的值，將用此數值作為該變數的值 (預設是 None)
+    [, default]                 #	在命令列中沒有找到變數，將會自行建立該變數，且賦予此值 (預設是 None)
+    [, type]                    #
+    [, choices]                 #	列出變數可接受的值，可使用 list 等 sequences 結構，包含 range()
+    [, required]                #	用於表示 Optional 變數必須在命令列中
+    [, help]                    #	該參數的說明，會自動加入說明描述
+    [, metavar]                 #	在說明文件中表示變數值的文字
+    [, dest]                    #
 )
 ```
 
@@ -266,12 +266,12 @@ nargs 後面接的值除了數字之外，還接受另外 3 種字符，分別�
 ``` python3
 argparse.Namespace = argparse.ArgumentParser.parse_args (
     args = None             #    需要解析的字串，預設來自於 sys.argv 變數
-	namespace = None        #    解析完的資料所存放的
+    namespace = None        #    解析完的資料所存放的
 )
 
 argparse.Namespace = argparse.ArgumentParser.parse_known_args (
     args = None, 
-	namespace = None
+    namespace = None
 )
 ```
 
@@ -391,36 +391,36 @@ value = BAR
 
 ``` python3
 argparse.action = ArgumentParser.add_subparsers (
-	[title]               #	子 Parser 的名稱。當 description 參數有定義，預設是 "subcommands"；不然是 positional 變數的名稱
-	[, description]       #	子 Parser 的說明，預設是 None
-	[, prog]              #	預設是程式名稱
-	[, parser_class]      #	預設是 ArgumentParser，亦可為自訂 class
-	[, action]            #	
-	[, option_strings]    #
-	[, dest]              #	可以用來表示哪一個子命令被呼叫
-	[, required]          #
-	[, help]              #
-	[, metavar]           #
+    [title]               #	子 Parser 的名稱。當 description 參數有定義，預設是 "subcommands"；不然是 positional 變數的名稱
+    [, description]       #	子 Parser 的說明，預設是 None
+    [, prog]              #	預設是程式名稱
+    [, parser_class]      #	預設是 ArgumentParser，亦可為自訂 class
+    [, action]            #	
+    [, option_strings]    #
+    [, dest]              #	可以用來表示哪一個子命令被呼叫
+    [, required]          #
+    [, help]              #
+    [, metavar]           #
 )
 
 ArgumentParser = argparse.action.add_parser (
-	...                   #	應該接受所有建立 ArgumentParser 的參數
-	aliases=[]            #	定義子命令可以接受的所有 key words
+    ...                   #	應該接受所有建立 ArgumentParser 的參數
+    aliases=[]            #	定義子命令可以接受的所有 key words
 )    
 ```
 
-這個架構，就像是下圖。當處理命令列參數時，父 (根) parser 會先處理命令列參數。如果有找到子 parser 對應的命令，就會交由子 parser 處理；應該子命令就像是一個[互斥群組]()，只會有一個子 parser 處理對應的命令列。
+這個架構，就像是下圖。當處理命令列參數時，父 (根) parser 會先處理命令列參數。如果有找到子 parser 對應的命令，就會交由子 parser 處理；只是子命令就像是一個[互斥群組](./argparse.html#%E4%BA%92%E6%96%A5%E7%BE%A4%E7%B5%84)，只會有一個子 parser 處理對應的命令列。
 
 ```
 ArgumentParser /--
                 |
-				|- 變數    #	父 Parser 處理的命令列參數
-				|
-				|- argparse.action /--    <-- 來自於 ArgumentParser.add_subparser()
-				                    |
-									|- ArgumentParser /--         <-- 來自於 argparser.action.add_parser()
-									                   |
-												       |- 變數    #	子 Parser 處理的命令列參數
+                |- 變數    #	父 Parser 處理的命令列參數
+                |
+                |- argparse.action /--    <-- 來自於 ArgumentParser.add_subparser()
+                                    |
+                                    |- ArgumentParser /--         <-- 來自於 argparser.action.add_parser()
+                                                       |
+                                                       |- 變數    #	子 Parser 處理的命令列參數
 ```
 
 但是事實上，父 (根) parser 下可以同時存在多個子 parser，只是同一個命令列只能有一個子 parser 幫忙處理。例外是 --help 參數，當列印 說明文件時，如果沒有指定子 parser 的命令，就會印出父 parser 下所有子 parser 支援的命令。
@@ -435,8 +435,8 @@ ArgumentParser /--
 
 ``` python3
 group = ArgumentParser.add_argument_group (
-	title = None,         #	變數 group 的名稱
-	description = None    #	變數 group 的說明
+    title = None,         #	變數 group 的名稱
+    description = None    #	變數 group 的說明
 )
 ```
 
@@ -472,7 +472,7 @@ group2:
 
 ``` python3
 group = ArgumentParser.add_mutually_exclusive_group (
-		required = False    #	群組中的變數是否一定要有一個出現在命令列中
+    required = False    #	群組中的變數是否一定要有一個出現在命令列中
 )
 
 >>> parser = argparse.ArgumentParser(prog='PROG')
@@ -496,7 +496,7 @@ Group title:
 
 ### Parser 的預設值
 
-我們可以在[客製化 parse 規則]() 中制訂某些變數的預設值，即便在命令列中沒有找到對應的參數，該變數還是有預設值可以使用。
+我們可以在[客製化 parse 規則](./argparse.html#%E5%AE%A2%E8%A3%BD%E5%8C%96-parsing-%E8%A6%8F%E5%89%87) 中制訂某些變數的預設值，即便在命令列中沒有找到對應的參數，該變數還是有預設值可以使用。
 
 ArgumentParser 提供了另一個 API 讓我們能一次制定多個變數的預設值
 
@@ -519,22 +519,22 @@ Namespace(bar=42, baz='badger', foo=736)
 
 ``` python3
 argparse.Namespace = argparse.ArgumentParser.parse_intermixed_args(
-	args = None,
-	namespace = None
+    args = None,
+    namespace = None
 )
 
 argparse.Namespace = argparse.ArgumentParser.parse_known_args(
-	args = None,
-	namespace = None
+    args = None,
+    namespace = None
 )
 
 argparse.Namespace = argparse.ArgumentParser.parse_known_intermixed_args(
-	args = None,
-	namespace = None
+    args = None,
+    namespace = None
 )
 ```
 
-這兩個 APIs 並未支援前述 ArgumentParser 的所有功能；當使用者使用這兩個 APIs， 可能會因為使用到未支援的功能而跳出例外。基本上，[子命令]() 與 [互斥]() 兩項功能不論是在 Optional 變數或是 Positional 變數上，都不支援
+這兩個 APIs 並未支援前述 ArgumentParser 的所有功能；當使用者使用這兩個 APIs， 可能會因為使用到未支援的功能而跳出例外。基本上，[子命令](./argparse.html#%E5%AD%90%E5%91%BD%E4%BB%A4) 與 [互斥](./argparse.html#%E4%BA%92%E6%96%A5%E7%BE%A4%E7%B5%84) 兩項功能不論是在 Optional 變數或是 Positional 變數上，都不支援
 
 另外，parse_Known_args() 或是 parse_known_intermixed_args() 函式回傳的 argparse.Namespace 會包含兩個 namespace，第二個 namespace 將存放 **未定義** 變數。而 parse_intermixed_args() 與 parse_known_intermixed_args() 函數會將被 optional 變數打斷的 positional 變數 '2' 跟 '3' 歸類到 positinal 變數 rest 中
 
