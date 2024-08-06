@@ -19,3 +19,4 @@
 - Appendix A. Library
     - [Operting System Services](./library/Operating-System-Services/README.md)
         - [argparse](./library/Operating-System-Services/argparse.md)
+        - [time](./library/Operating-System-Services/time.md)
