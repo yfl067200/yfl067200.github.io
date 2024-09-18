@@ -1,3 +1,3 @@
 
-[bitbake](./poky/bitbake/01-framework.md)
+[bitbake](./poky/bitbake/01-Initialization.md)
 
