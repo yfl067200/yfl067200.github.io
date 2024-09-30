@@ -18,4 +18,4 @@ This is my study notes
 
 ## statistics
 
-- [Bayes's Theorem](./match/statistics/Bayes-Theorem.md)
+- [Bayes's Theorem](./math/statistics/Bayes-Theorem.md)
