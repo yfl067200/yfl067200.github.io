@@ -1,5 +1,4 @@
 
-節錄自 Yacto Bitbake User Manual (https://docs.yoctoproject.org/bitbake/2.10/bitbake-user-manual/bitbake-user-manual-intro.html)。
 
 # Introduction
 
@@ -17,6 +16,8 @@ Bitbake 是一個可以同步執行多個 shell script 與 python script 的架�
 
   - Server 將會進行排程，並指派單一 client 進行某個 recipe 中的某一個動作
 
+<metadata>
+  <summary>Metadata 的簡介</summary>
 
 ## Metadata
 
@@ -46,6 +47,8 @@ Recipe 檔案是由 Yocto 或是 OpenEmbedded 專案維護，集中存放在某�
 - local.conf
 
 其中 bblayers.conf 檔案列出 bitbake 在編譯該專案時，需要存取的檔案目錄；而 local.conf 則條列出編譯該專案時使用的變數，包含 MACHINE 與 DISTRO 這類用來說明編譯目標的變數，或是 DL_DIR、SSTATE_DIR、與 TMPDIR 指定編譯專案時使用到的檔案位置。
+
+</metadata>
 
 ### bitbake 設定檔
 
