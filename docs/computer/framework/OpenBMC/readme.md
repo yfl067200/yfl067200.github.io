@@ -10,7 +10,7 @@ Yocto project 是一個 [Linux Foundation](https://www.linuxfoundation.org/) 下
 > 在 2010 年，OpenEmbedded 重新整理了OpenEmbedded 的架構。原本的架構被稱為 OpenEmbedded-Class，新的架構被稱為 OpenEmbedded-Core；新的 OpenEmbedded-Core 支援多個 Layer，提供更容易客製化 Linux 的環境。
 > 
 > 以下為 OpenEmbedded Project 的 [git tree](https://git.openembedded.org/?s=name)。其中 openembedded 為 OpenEmbedded-Class，而 openembedded-core 為 OpenEmbbed-Core。比對兩者，您可以發現 OpenEmbedded-Core 提供多個 meta- 目錄，類似的工具會被歸類進同一個 meta- 目錄。
-> ![](./docs/computer/framework/OpenBMC/OpenEmbedded/figures/C0C3A6FA-A30C-49BE-869F-E6C1A96A0983.png) 
+> ![[{C0C3A6FA-A30C-49BE-869F-E6C1A96A0983}.png]]
 
 ## Layers
 
