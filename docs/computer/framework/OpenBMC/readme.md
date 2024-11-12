@@ -25,7 +25,7 @@ Yocto Project 與 OpenEmbedded Project 整合之後，將 OpenBedded-Core 作為
 
 # OpenEmbedded 架構
 
-在了解  Yocto Project 與 OpenEmbedded Project 的關係之後，要開始對其架構進行更進一步了說明。唯有了解 OpenBedded Framework，才能理解如何客製化 Linux 環境
+在了解  Yocto Project 與 OpenEmbedded Project 的關係之後，要開始對其架構進行更進一步了說明。唯有了解 OpenBedded Framework，才能理解如何客製化 Linux 環境。這邊用一個簡單圖片來說明相關的關係
 ![[{04704057-531D-4647-82C8-B6579FF7AAC5}.png]]
 
 以下為 OpenEmbedded 架構的核心：
