@@ -13,9 +13,3 @@ This is my study notes
 ## Framework
 
 - [OpenBMC](./computer/framework/OpenBMC/readme.md)
-
-# Math
-
-## statistics
-
-- [Bayes's Theorem](./math/statistics/Bayes-Theorem.md)

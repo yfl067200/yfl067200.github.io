@@ -60,6 +60,8 @@ Bitbake 亦支援多重目標 Firmware。以下圖為例，該專案有兩種不
 
 ## Class (.bbclass) 檔案
 
-Class 檔案主要是集中在 poky/meta/classes 與 poky/meta/classes-recipe 兩個目錄，兩者都是提供 bitbake 編譯時用的函式。在 poky/meta/classes 目錄下，Class 檔案
+Class 檔案主要是集中在 poky/meta/classes 與 poky/meta/classes-recipe 兩個目錄，兩者都是提供 Bitbake 編譯時用的函式。
+
+Class 檔案大多是包含了 Bitbake 共用的函式與變數，透過特殊字 `inherit`，可以將 Class 檔案的內容嵌入 Recipe 檔案。
 
 ##  Include (.inc) 檔案
