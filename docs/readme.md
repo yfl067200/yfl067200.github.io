@@ -18,4 +18,4 @@ This is my study notes
    
 ## IPC
 
-- [D-Bus](docs/computer/IPC/D-Bus/README.md
+- [D-Bus](docs/computer/IPC/D-Bus/README.md)
