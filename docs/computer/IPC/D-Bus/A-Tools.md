@@ -113,12 +113,12 @@ ${VARIANT} ::= ${VARIANT}:${TYPE}:${VALUE}
 ${DICTIONARY} ::= dict:${TYPE}:${TYPE}:${KEY}:${VALUE}[, ${KEY}:${VALUE}]
 ```
 
-與相對方便的 busctl 命令相比，使用 dbus-send 命令必須透過 [[01.1-Common Interfaces]] 描述的共用介面與該物件互動
+與相對方便的 busctl 命令相比，使用 dbus-send 命令必須透過 [[01.1-Common_Interfaces]] 描述的共用介面與該物件互動
 ## Example 
 
 ### Introspect
 
-我們還是用 `Bus` "org.freedesktop.hostname1" 下的 `Object` "/org/freedesktop/hostname1" 為範例。從 [[01.1-Common Interfaces]] 可以知道，我們可以透過呼叫 `Interface` org.freedesktop.DBus.Introspectable 下的 `Method` Introspect() 得到跟 busctl introspect 相同的結果。按照上述 dbus-send 的語法說明，我們可以使用下面的命令
+我們還是用 `Bus` "org.freedesktop.hostname1" 下的 `Object` "/org/freedesktop/hostname1" 為範例。從 [[01.1-Common_Interfaces]] 可以知道，我們可以透過呼叫 `Interface` org.freedesktop.DBus.Introspectable 下的 `Method` Introspect() 得到跟 busctl introspect 相同的結果。按照上述 dbus-send 的語法說明，我們可以使用下面的命令
 
 > dbus-send --system --print-reply --dest=org.freedesktop.hostname1  /org/freedesktop/hostname1 org.freedesktop.DBus.Introspectable.Introspect
 
