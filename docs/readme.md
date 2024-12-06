@@ -14,7 +14,7 @@ This is my study notes
 
 -  [OpenEmbedded](./computer/framework/OpenEmbedded/README.md)
 
- - [OpenBMC](./computer/framework/OpenEmbedded/README.md)
+ - [OpenBMC](./computer/framework/OpenBMC/README.md)
    
 ## IPC
 
