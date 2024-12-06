@@ -196,40 +196,40 @@ if lock:
 
 ### General Group
 
-| 參數名稱 | 命令列參數 | action | 說明 |
-|:---------|:-----------|:-------|:-----|
-| `targets` | | nargs="\*", metavar="recipename/target" | bitbake 要執行的目標 (target) recipe 檔案 (.bb) |
-| `show_environment` | `--environment` <br> `-e` | action="store_true", dest="show_environment" | 顯示 global 與各 recipes 使用到的環境變數 |
-| `dot_graph` | `--graphviz` <br> `-g` | action="store_true", dest="dot_graph" | 建立並儲存執行目標 recipe 中的相依樹狀圖 |
-| | `--help` <br> `-h` | action="help" | 顯示 help 訊息並結束 |
-| | `--show-versions` <br> `-s` | action="store_true" | 顯示目前各 recipes 的版本 |
-| | `--ui` <br> `-u` | default=os.environ.get( "BITBAKE_UI", "knotty" ) | |
-| | `--version` | action="store_true" | 顯示 bitbake 的版本並結束 |
+| 參數名稱               | 命令列參數                       | action                                           | 說明                                      |
+| :----------------- | :-------------------------- | :----------------------------------------------- | :-------------------------------------- |
+| `targets`          |                             | nargs="\*", metavar="recipename/target"          | bitbake 要執行的目標 (target) recipe 檔案 (.bb) |
+| `show_environment` | `--environment` <br> `-e`   | action="store_true", dest="show_environment"     | 顯示 global 與各 recipes 使用到的環境變數           |
+| `dot_graph`        | `--graphviz` <br> `-g`      | action="store_true", dest="dot_graph"            | 建立並儲存執行目標 recipe 中的相依樹狀圖                |
+|                    | `--help` <br> `-h`          | action="help"                                    | 顯示 help 訊息並結束                           |
+|                    | `--show-versions` <br> `-s` | action="store_true"                              | 顯示目前各 recipes 的版本                       |
+|                    | `--ui` <br> `-u`            | default=os.environ.get( "BITBAKE_UI", "knotty" ) |                                         |
+|                    | `--version`                 | action="store_true"                              | 顯示 bitbake 的版本並結束                       |
 
 ## Task Group
 
-| 參數名稱 | 命令列參數 | action | 說明 |
-|:---------|:-----------|:-------|:-----|
-| | `--force` <br> '-f` | action="store_true" | 強制執行某一目標或是特定工作，無視 stamp 資料 |
-| | `--cmd` <br> `-c` | | 強制執行某一個工作 (task)，譬如 compile <br> 會參考 stamp 資料 |
-| `invalidate_stemp` | `--clear-stamp` <br> `-C` | dest="invalidate_stamp" | 無視於某工作的 stamp 檔案，執行某目標中對該工作的預設動作 |
-| | `--runall` | action="append", default=[] | 將目標 (target) 與依賴該目標的其他目標，進行特定的工作 <br> 本動作完成後，會將被影響到的目標視為新的目標，重新進行相同的動作，直到沒有新的目標為止 |
-| | `--runonly` | action="append" | 將目標 (target) 與相依於其的其他目標都執行某項工作 (task) <br> 與 `--runall` 的不同之處在於，`runonly` 不會進行新的一輪 |
-| `nosetscene` | `--no-setscene` | action="store_true", dest="nosetscene" | 將略過所有 setscene 工作 <br> sstate 資訊將被無視，完全重新編譯目標 |
-| `skipsetscene` | `--skip-setscene` | action="store_true", dest="skipsetscene" | 將略過所有 setscene 工作 <br> sstate 資訊會被最為參考 |
-| `setscene` | `--setscene-only` | action="store_true", dest="setsceneonly" | 只進行 setscene 工作 |
+| 參數名稱               | 命令列參數                     | action                                   | 說明                                                                                 |
+| :----------------- | :------------------------ | :--------------------------------------- | :--------------------------------------------------------------------------------- |
+|                    | `--force` <br> '-f`       | action="store_true"                      | 強制執行某一目標或是特定工作，無視 stamp 資料                                                         |
+|                    | `--cmd` <br> `-c`         |                                          | 強制執行某一個工作 (task)，譬如 compile <br> 會參考 stamp 資料                                      |
+| `invalidate_stemp` | `--clear-stamp` <br> `-C` | dest="invalidate_stamp"                  | 無視於某工作的 stamp 檔案，執行某目標中對該工作的預設動作                                                   |
+|                    | `--runall`                | action="append", default=[]              | 將目標 (target) 與依賴該目標的其他目標，進行特定的工作 <br> 本動作完成後，會將被影響到的目標視為新的目標，重新進行相同的動作，直到沒有新的目標為止  |
+|                    | `--runonly`               | action="append"                          | 將目標 (target) 與相依於其的其他目標都執行某項工作 (task) <br> 與 `--runall` 的不同之處在於，`runonly` 不會進行新的一輪 |
+| `nosetscene`       | `--no-setscene`           | action="store_true", dest="nosetscene"   | 將略過所有 setscene 工作 <br> sstate 資訊將被無視，完全重新編譯目標                                      |
+| `skipsetscene`     | `--skip-setscene`         | action="store_true", dest="skipsetscene" | 將略過所有 setscene 工作 <br> sstate 資訊會被最為參考                                             |
+| `setscene`         | `--setscene-only`         | action="store_true", dest="setsceneonly" | 只進行 setscene 工作                                                                    |
 
 ## Exec Group 
 
-| 參數名稱 | 命令列參數 | action | 說明 |
-|:---------|:-----------|:-------|:-----|
-| | `--buildfile` <br> `-b` | | 編譯某個目標，無視於相依性 |
-| `halt` | `--continue` <br> `-k` | action="store_false", dest="halt" | 即使遇到錯誤，也盡可能跑完可以執行的工作 |
-| | `--dry-run` <br> `-n` | action="store_true" | 依序執行，但是沒有真正的執行工作 |
-| `SIGNATURE_HANDLER` | `--dump-signatures` <br> `-S` | action="store_true", default=[], metavar="SIGNATURE_HANDLER" |  |
-| | `--parse-only` <br> `-p` | action="store_true" | 進行 parse BB 檔案的工作並結束 |
-| | `--profile` <br> `-P` | action="store_true" | 建立相關 profile 與報表 |
-| | `--revisions-changed` | action="store_true" | 指定結束的代碼。當確認 upstream 的原始碼改變便結束 |
+| 參數名稱                | 命令列參數                         | action                                                       | 說明                             |
+| :------------------ | :---------------------------- | :----------------------------------------------------------- | :----------------------------- |
+|                     | `--buildfile` <br> `-b`       |                                                              | 編譯某個目標，無視於相依性                  |
+| `halt`              | `--continue` <br> `-k`        | action="store_false", dest="halt"                            | 即使遇到錯誤，也盡可能跑完可以執行的工作           |
+|                     | `--dry-run` <br> `-n`         | action="store_true"                                          | 依序執行，但是沒有真正的執行工作               |
+| `SIGNATURE_HANDLER` | `--dump-signatures` <br> `-S` | action="store_true", default=[], metavar="SIGNATURE_HANDLER" |                                |
+|                     | `--parse-only` <br> `-p`      | action="store_true"                                          | 進行 parse BB 檔案的工作並結束           |
+|                     | `--profile` <br> `-P`         | action="store_true"                                          | 建立相關 profile 與報表               |
+|                     | `--revisions-changed`         | action="store_true"                                          | 指定結束的代碼。當確認 upstream 的原始碼改變便結束 |
 
 ## Logging Group
 

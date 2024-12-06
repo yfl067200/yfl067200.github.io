@@ -8,14 +8,14 @@ Entity Manager 將會讀取所有相關的 JSON 檔案，並將對應硬體的�
 # Schema 檔案
 
 Entity Manager 定義了 JSON 檔案的結構，可以在 Entity Manager 的 repository 下 [schema 目錄](https://github.com/openbmc/entity-manager/tree/master/schemas)找到完整的資訊。 我們以 [global.json 檔案](https://github.com/openbmc/entity-manager/blob/master/schemas/global.json)來說明
-![[{D1CA4811-2A8A-4BCF-967C-1A5B8128DCF3}.png]]
+![[./figures/{D1CA4811-2A8A-4BCF-967C-1A5B8128DCF3}.png]]
 
 一個正確的 configuration 檔案，必須包含一個 EMConfig 或是一個包含多個 EMConfig 的 JSON Array。
 
 ## EMConfig
 
 這是 Entity Manager 使用的 Configuration 檔案核心之一，用來說明某個硬體。必須包含四個屬性
-![[{B6AFDD18-3059-4B69-A5BD-D2C9086B4020}.png]]
+![[./figures/{B6AFDD18-3059-4B69-A5BD-D2C9086B4020}.png]]
 
 | 屬性        | 說明                                                                                         |
 | :-------- | :----------------------------------------------------------------------------------------- |
@@ -33,7 +33,7 @@ Entity Manager 定義了 JSON 檔案的結構，可以在 Entity Manager 的 rep
 ## EMExposeElement 
 
 這是 Entity Manager 使用的 Configuration 檔案核心之一，用來說明某個硬體提供的存取功能
-![[{66B94C5C-D54F-47F7-B41C-D2925F116AE2}.png]]
+![[./figures/{66B94C5C-D54F-47F7-B41C-D2925F116AE2}.png]]
 
 # D-Bus
 

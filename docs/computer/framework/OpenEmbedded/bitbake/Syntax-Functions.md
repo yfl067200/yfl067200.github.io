@@ -220,7 +220,7 @@ Bitbake 在編譯過程中，會有需多階段，各階段會產生出 Event (�
 | bb.cooker.CookerExit()      | 觸發於 Bitbake server/cooker 被 shut down                                                                       |
 
 > [!NOTE]
-> BuildStart() 與 BuildCompleted() 是一個特殊的事件，跟 Bitbake 支援 [多重 Configuration 檔案] 相關，詳情請參考 [[01-Overview]] 一章。當這兩個事件觸發時，Bitbake 尚未解析 Metadata。
+> BuildStart() 與 BuildCompleted() 是一個特殊的事件，跟 Bitbake 支援 [多重 Configuration 檔案] 相關，詳情請參考 [[Overview]] 一章。當這兩個事件觸發時，Bitbake 尚未解析 Metadata。
 
 ### Event Handler
 
@@ -259,7 +259,7 @@ myclass_handler[eventmask] = "bb.event.BuildStarted bb.event.BuildCompleted"
 
 ## 環境變數
 
-在 [[02-Projects]] 一章中有提到，要編譯 Yocto 專案前，必須要先執行 `. ./setup ${PROJECT} ${DEST}` 命令。這是因為 Bitbake 會清除編譯時的環境變數，並套用自己所需要的環境變數。透過以下變數，Bitbake 得以做到控制環境變數：
+在 [[Projects]] 一章中有提到，要編譯 Yocto 專案前，必須要先執行 `. ./setup ${PROJECT} ${DEST}` 命令。這是因為 Bitbake 會清除編譯時的環境變數，並套用自己所需要的環境變數。透過以下變數，Bitbake 得以做到控制環境變數：
 
 - 變數 `BB_PRESERVE_ENV` - 決定是否要清除現有的環境變數
 - 變數 `BB_ENV_PASSTHROUGH` 與 `BB_ENV_PASSTHROUGH_ADDITIONS` - 將 Bitbake 變數名稱放進這兩個變數中，可供 Bitbake 通過資料倉儲 (datastore) "d" 存取。

@@ -26,7 +26,7 @@
 | 變數名稱                           | 說明                                                                                                                                                                |
 | :----------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `BB_ALLOWED_NETWORKS`          | 下載相關變數                                                                                                                                                            |
-| `BB_BASEHASH_IGNORE_VARS`      | 請查閱 [[02-Projects]] 一章中，名為 Signatures 的流程                                                                                                                         |
+| `BB_BASEHASH_IGNORE_VARS`      | 請查閱 [[Projects]] 一章中，名為 Signatures 的流程                                                                                                                         |
 | `BB_CACHEDIR`                  | Bitbake 設定相關變數，與 Bitbake 可用資源相關                                                                                                                                   |
 | `BB_CHECK_SSL_CERTS`           | Fetcher 下載時，是否需要檢查 SSL vertifications <br>預設值為 '1'，改為 '0' 將不檢查 SSL Certification 資料                                                                               |
 | `BB_CONSOLELOG`                | Bitbake 輸出的 log 檔案路徑                                                                                                                                              |
@@ -81,7 +81,7 @@
 
 ## BB 開頭
 
-與 `LAYER` 開頭的變數用來設定 Bitbake 如何處理 layers 與其下的 Class 檔案與 Recipe 檔案。請參考[[C-Variables]]下的 "layer.conf 檔案" 一節
+與 `LAYER` 開頭的變數用來設定 Bitbake 如何處理 layers 與其下的 Class 檔案與 Recipe 檔案。請參考[[Variables]]下的 "layer.conf 檔案" 一節
 
 | 變數                    | 說明                                                                                   |
 | :-------------------- | ------------------------------------------------------------------------------------ |
@@ -100,7 +100,7 @@
 
 ## BBFILE_ 開頭
 
-以下 "BBFILE_" 開頭的變數，內容都來自各 Layers 下 conf/layer.conf 檔案的同名變數。請參考[[C-Variables]]下的 "layer.conf 檔案" 一節
+以下 "BBFILE_" 開頭的變數，內容都來自各 Layers 下 conf/layer.conf 檔案的同名變數。請參考[[Variables]]下的 "layer.conf 檔案" 一節
 
 # C 開頭
 
@@ -162,7 +162,7 @@
 
 # L 開頭
 
-與 `BB` 開頭的變數用來設定 Bitbake 如何處理 layers 與其下的 Class 檔案與 Recipe 檔案，請參考[[C-Variables]]下的 "layer.conf 檔案" 一節
+與 `BB` 開頭的變數用來設定 Bitbake 如何處理 layers 與其下的 Class 檔案與 Recipe 檔案，請參考[[Variables]]下的 "layer.conf 檔案" 一節
 
 # M 開頭
 

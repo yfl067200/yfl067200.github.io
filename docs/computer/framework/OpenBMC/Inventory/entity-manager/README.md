@@ -12,6 +12,6 @@ Entity Manager 的設計原則包含：
 
 
 
-01. [Definitions](01-Definitions.md) - 簡易的說明 Entity Manager 的功能，與其他互動的 Packages
-02. [Configurations](02-Configurations.md) - 說明如何建立正確的 configuration files
-03. [Topology](03-Topology.md)
+- [01. Definitions](./Definitions.md) - 簡易的說明 Entity Manager 的功能，與其他互動的 Packages
+- [02. Configurations](./Configurations.md) - 說明如何建立正確的 configuration files
+- [0.3 Topology](./Topology.md)

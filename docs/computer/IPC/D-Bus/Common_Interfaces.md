@@ -16,7 +16,7 @@
 
 ### Introspect() --> string
 
-提供該 `Object` 下所有 `Interfaces` 等資訊，得到的資料跟透過 busctl introspect 一致。這邊我們用 `Bus` "org.freedesktop.hostname1" 下的 `Object` "/org/freedesktop/hostname1" 為例，結果如這個 [JSON 檔案](./computer/IPC/D-Bus/attachments/org.freedesktop.hostname1.json)
+提供該 `Object` 下所有 `Interfaces` 等資訊，得到的資料跟透過 busctl introspect 一致。這邊我們用 `Bus` "org.freedesktop.hostname1" 下的 `Object` "/org/freedesktop/hostname1" 為例，結果如這個 [JSON 檔案](./attachments/org.freedesktop.hostname1.json)
 
 # org.freedesktop.DBus.Properties
 
@@ -27,9 +27,7 @@
 | `Method` | `Set()`               | `ssv`          | -               | s - `Interface` 名稱<br>s - `Property` 名稱<br>v - 該 `Property` 的新值<br>更新某個 `Interface` 下，某一個 `Property` 的值 |
 | `Signal` | `PropertiesChanged()` | `sa{sv}as`     | -               |                                                                                                         |
 透過 Introspect，我們可以得到更詳細的資訊，包含 `Method` 所需的參數與型態。以下為本 `Interface` 下 `Method` 與 `Signal` 的詳細資訊
-![[{5FA8DB95-A411-4038-870E-64AEE41E3D8F}.png]]
-
-![[./computer/IPC/D-Bus/figures/{5FA8DB95-A411-4038-870E-64AEE41E3D8F}.png]]
+![[./figures/{5FA8DB95-A411-4038-870E-64AEE41E3D8F}.png]]
 
 相較於 `Method` 的易懂，`Signal` PropertiesChanged 比較複雜。該 `Signal` 將會送出 3 組資訊：
 

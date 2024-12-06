@@ -6,10 +6,10 @@ D-Bus 本身支援 socket，除了本身機器之外，也可以透過 TCP 與�
 
 以下章節將對 D-Bus 有更詳細的說明
 
-- [01. Introduction](computer/IPC/D-Bus/01-Introduction.md) - 說明 D-Bus 的核心用語，包含 Object Model、Signature 等
-    - [01-1. Common Interfaces](computer/IPC/D-Bus/01.1-Common_Interfaces.md) - 說明每個 D-Bus `Object` 必定包含的 `Interfaces` 與相關 `Method`
+- [01. Introduction](docs/computer/IPC/D-Bus/Introduction.md) - 說明 D-Bus 的核心用語，包含 Object Model、Signature 等
+    - [01-1. Common Interfaces](Common_Interfaces.md) - 說明每個 D-Bus `Object` 必定包含的 `Interfaces` 與相關 `Method`
 
-- [Appendix A. Tools](computer/IPC/D-Bus/A-Tools.md) - 目前在 Linux 上常見的 D-Bus 工具與如何使用
-- [Appendix B. Low_Level_API](computer/IPC/D-Bus/B-Low_Level_API.md) - 開發 D-Bus 使用的 C Library (libdbus)
-    - [B-1. sd-bus](computer/IPC/D-Bus/B.1-sd-bus.md) - 比較新的 D-Bus library，是 systemd 開發者建立
+- [Appendix A Tools](Tools.md) - 目前在 Linux 上常見的 D-Bus 工具與如何使用
+- [Appendix B. Low_Level_API](Low_Level_API.md) - 開發 D-Bus 使用的 C Library (libdbus)
+    - [B-1. sd-bus](sd-bus.md) - 比較新的 D-Bus library，是 systemd 開發者建立
 

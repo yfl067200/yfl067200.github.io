@@ -80,7 +80,7 @@ Bitbake 內部使用 2 個變數 `B` 與 `T`，用來說明 Bitbake 進行編譯
 ## layer.conf 檔案
 
 下為 meta-aspeed/conf/layer.conf 檔案的內容
-![[{FD780ED2-A727-4D82-9B11-0AE43CBD4141}.png]]
+![[./figures/{FD780ED2-A727-4D82-9B11-0AE43CBD4141}.png]]
 
 Layer.conf 檔案中，除了說明路徑的變數之外，還有以下用來說明本 layer 的資訊。這些變數大多會使用 `${VARIABLE}_${BBFILE_COLLECTIONS}` 的形式，用來說明 layer `${BBFILE_COLLECTIONS}` 的相關資訊
 

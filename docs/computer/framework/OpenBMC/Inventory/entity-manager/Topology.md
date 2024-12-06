@@ -1,5 +1,5 @@
 
-在 [Definitions](01-Definitions.md) 一節中，有簡略的說明 Entity Manager 是如何與其他 Packages 互動，建立完整的硬體 topology。在本節中，將說明如何在 Entity Manager 中建立對應硬體的 Configuration 檔案
+在 [Definitions](Definitions.md) 一節中，有簡略的說明 Entity Manager 是如何與其他 Packages 互動，建立完整的硬體 topology。在本節中，將說明如何在 Entity Manager 中建立對應硬體的 Configuration 檔案
 
 # Configuration 檔案
 

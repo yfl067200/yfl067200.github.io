@@ -52,7 +52,7 @@ Recipe 檔案是由 Yocto Project 維護，集中存放在某個特定的目錄�
 ### 多重 Configuration 檔案
 
 Bitbake 亦支援多重目標 Firmware。以下圖為例，該專案有兩種不同的目標；不同的目標多半是因為硬體上的差異。
-![[{0EF587CD-99D0-4959-9A6F-E37975DF7A5A}.png]]
+![[./figures/{0EF587CD-99D0-4959-9A6F-E37975DF7A5A}.png]]
 
 為了支援多重 Configuration 檔案，在 local.conf 檔案中必須加上這一行：
 
