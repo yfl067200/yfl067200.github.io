@@ -12,4 +12,10 @@ This is my study notes
 
 ## Framework
 
-- [OpenBMC](./computer/framework/OpenBMC/readme.md)
+-  [OpenEmbedded](docs/computer/framework/OpenEmbedded/README.md)
+
+ - [OpenBMC](docs/computer/framework/OpenEmbedded/README.md)
+   
+## IPC
+
+- [D-Bus](docs/computer/IPC/D-Bus/README.md
