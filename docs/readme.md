@@ -6,9 +6,9 @@ This is my study notes
 
 - [C++](./computer/languages/C++/R-Value.md)
 
-- [Python](./computer/languages/python/toc.md)
+- [Python](docs/computer/languages/python/README.md)
 
-- [Rust](./computer/languages/rust/toc.md)
+- [Rust](docs/computer/languages/rust/README.md)
 
 ## Framework
 

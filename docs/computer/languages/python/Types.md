@@ -1,79 +1,224 @@
-# 資料型態
+Python 是==強型態==的語言，亦即不能將不同型態的資料結合在一起；譬如說，字串跟整數就不能結合。
 
-Python 是強型態的語言，亦即不能將不同型態的資料結合在一起；譬如說，字串跟整數就不能結合。但是 Python 是弱綁定，亦即你可以隨時將不同型態的資料綁定在同一個變數。再加上 Python 在宣告變數時，不需要指定資料型態。當賦予值的時候，Python 會自動綁定變數的資料型態。當不確定變數的資料型態為何，可以呼叫 type( 變數 ) 函式，即可獲得變數當前的資料型態；或是透過 isinstance( 變數, 型態 ) 函式確認變數是否是某種型態
+但是 Python 同時也具有==弱綁定==的特性，亦即你可以隨時將不同型態的資料綁定在同一個變數：Python 在宣告變數時，不需要指定資料型態。當賦予值的時候，Python 會自動綁定變數的資料型態。
 
 ``` python
 #    declaring variable
 ${VARIABLE}[ = ${VALUE}]
 
-#    data type of variable
+#    當不確定變數的資料型態，可呼叫 type( 變數 ) 函式獲得變數當前的資料型態
 type( ${VARIABLE} )
 
-#    validating variable is what kind of data type
+#    亦可透過 isinstance( 變數, 型態 ) 函式確認變數是否是某種型態
 isinstance( ${VARIABLE}, ${TYPE} )
 ```
 
-## 變數
+# Object
 
-[Python Tutor](https://pythontutor.com/visualize.html#mode=edit) 網站提供了視覺化的方式說明 Python 程式碼在記憶體上的運作。
+Python 將 Object 視為唯一的抽象資料集合，變數不是 `Object`，就是 `Reference to Objects`。透過這種處理資料的方式，Python 可以輕易的實作弱綁定的特性 － 藉由指向不同的 `Oject`，變數可以隨時換成不同型態的資料。 
 
-Python 在記憶體上建立 Object 儲存資料，而變數就想是 C 的指標，指向 Object 的位置。藉由這種方式，Python 才能實踐強型態與弱綁定的機制。對於 Python 而言，任何數值都會被當成 Object 儲存在記憶體中；每一個 Object 都有一個 ID，而變數儲存的是 Object 的位置。當改變變數的值時，Python 不是跟其他語言一樣，將變數指向位置的內容改變；Python 是將變數儲存新資料 (Object) 所在的位置。Python 提供一個名為 id 的函式，可以查看變數指向的 Object ID。
+Object 本身被 Garbage Collection 機制管理，一旦 Object 沒有被 Reference 就會被 GC 收集並摧毀；使用 try ... except 機制有可能將 Object 的生命延長。另外 Object 內部存放的外部資源，譬如說是 file descriptor 等，無法透過 GC 釋放。
+
+> [NOTE]
+> 有一個[網站](http://pythontutor.com/)可以讓您寫入 Python Script，執行時會用視覺化的方式顯示變數的內容
+
+Python 的 Object 有 3 種主要的屬性：
+
+- Identity
+- Type
+- Value
+## Identity
+
+其中 Identity 是當 Object 建立時便賦值，這個屬性的值並不會改變；Identity 之於 Python 就如同 Address 之於 C。運算元 `is` 就是用來比對兩個變數的 Identity 是否一致，可透過 `id()` 獲得某 Object 的 Identity；這也是用來確認變數指向的 `Object` 是否為同一個個方式。
+
+## Type
+
+Type 對於 Object 的影響至大，甚至於影響到變數的行為。
+
+我們以數值與 list 為例，初始化變數時的行為會因為不同 Type 而有不同的行為：
+``` Python
+def same( a, b ):
+    if id(a) == id(b):
+        print('Both variables are reference to same object')
+        return
+
+    print(f'Variables are reference to different object {id(a)}/{id(b)}')
+
+    if a == b:
+        print('Variables have same value')
+        return
+
+    print('Varables have different values')
+
+a = 1
+b = 1
+same(a,b)
+
+list_a = []
+list_b = []
+same(list_a, list_b)
+
+list_c = list_d = []
+same(list_c, list_d)
+
+a = 2
+same(a,b)
+```
+上述程式的結果如下：
+``` python
+# 因為變數 a 與 b 賦予相同的值，故 Python 建立一個 Object 並與變數 a 與 b 進行綁定
+Both variables are reference to same object
+
+# list_a 與 list_b 雖然被賦予相同的空 list，但是 Python 並不回重複綁定同一個 Object 到 list 型態
+Variables are reference to different object 4299666944/4299507840
+Variables have same value
+
+# 可以透過強制綁定的方式，讓 list 綁定到同一個 Object
+Both variables are reference to same object
+
+# 因為 a 重新賦值，Python 建立另一個 Object 並與變數 a 綁定
+Variables are reference to different object 4312162528/4312162496
+Varables have different values
+```
+## Value
+
+Python 將 Object 或是 reference to Object 作為儲存變數的唯一方法。
+
+> [IMPORT]
+> 出乎人意料之外，Python Object 的 Type 與 Value 也是不可改變的：每當你對變數進行任何運算動作，導致形態或是值改變，Python 的處理方式是敨過建立新的 Object 並重新將變數與新的 Object 進行綁定。
+
+Python 的變數依照能否重新指派 Object 中的 Value 屬性，分成 mutable 與 immutable 兩種不同型態：簡單的型態，像是 number、 string、與 tuple 為 immutable Object；而 dictionary 與 list 等 container，則為 mutable Object。就實作的方式來說，前者就是變數指向存放值的 `Object`：而後者可能是使用類似 double linker 的機制傳連多個存放值的 `Object`，藉由改變 linker 指向的 `Object`，達到改變內含資料的方式。
+
+> [mutable 變數]
+> Container 型態的資料，包含 tuple 型態，在其 Value 欄位存放的並非值，而是另一個 Object 的 Reference。
+> 
+> 如果 Reference 的 Object 是一個 mutable 型態，可以透過改變被 reference 的 Object 的值，改變 Container 的值。以 tuple 為例，雖然 tuple 是 immutable Object，但是如果賦值時 reference 的是某個 list 的某些 element，可以藉由改變 list 的值進而改變 tuple 的值。
+
+目前已知的 `mutable` 型態包含：
+
+- Bytes Array
+- Dictionary
+- List
+- Set
+### Shadow Copy 與 Deep Copy
+
+Python 的 `Object` 機制可能在初始化或是函式呼叫時，採用不同的方式傳遞參數。比較簡單的判斷方式是，如果參數是 `mutable`，那就會使用 `call by reference`；而 `Immutable` 參數，則是採用 `call by value` 的機制。
 
 ``` python
-def same( var1, var2 ):
-    if var1 == var2 and var1 is var2:
-        print( f"same value and same object" )
-    elif var1 == var2 and not var1 is var2:
-        print( f"same value but different objects: var1 = {id(var1)}, var2 = {id(var2)}" )
-    elif not var1 == var2 and var1 is var2:
-        print( f"Different values ({var1}/{var2})but same object" )
-    else:
-        print( f"Different values ({var1}/{var2}) and different objects: var1 = {id(var1)}, var2 = {id(var2)}" )
+def modify_list(mylist):
+    print(f'Lenght of list is {len(mylist)}')
+    mylist.append('ADDED')
 
-T0 = 42
-T1 = 42
-Ref = T0
-same( T0, T1 )
-same( T0, Ref )
-same( T1, Ref )
+def modify_string(mystring):
+	mystring = "Modified string"
+	print(f'mystring is {mystring}')
 
-T0 = 43
-same( T0, T1 )
-same( T0, Ref )
-same( T1, Ref )
+foo=[ 1, 'A', True]
+print(foo)    # [1, 'A', True]
+
+modify_list(foo)
+print(foo).   # [1, 'A', True, 'ADDED']
+
+bar="Hello World"
+print(bar)    # Hello World
+modify_string(bar)
+print(bar)    # Hello World
 ```
 
-![image](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/92513ae3-2358-4d2c-9575-3abb8610631e)
 
-Figure 2-1. Python 變數、值、與記憶體的關係
-
-Python 在 Object 中使用 reference count 管理記憶體。當 Object 中的 reference count 歸零之後，就會被清除。變數名稱可以包含字元跟數字
-
-
-### Immutable 與 Mutable
-
-在 Python 中所謂的 Mutable 是指可以修改記憶體中 Object 所儲存的值，而 Immutable 是指需要建立一個新的 object 才能改變變數的值。屬於 Immutable 的資料型態包含整數 (Integer)、浮點數 (Float)、字串 (String)、與元 (tuple)，而 mutable 的型態包含列 (List)、集合 (Set)、與目錄 (Dictionary) 等。
-
-簡而言之，任何變數指向的 Object 內容都不能改，但是 Object 另外指向的 Object 內容是可以更改的；例外是元，元儲存的 Object 的位置。而該 Object 又指向實際值儲存的位置。但是 Python 不讓人修改元裡面的內容。下圖中的 Frames 中的變數與值可以視為變數指向儲存值 (object) 的位置，可以從 output 的 ID 判斷
-
-![Immutable](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/9075ea26-9d83-4aae-a55d-0d1e2932ae65)
-
-Figure 2-2. Immutable 型態
-
-![Mutable](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/7277465d-265e-4dfc-9fc5-084706b906c2)
-
-Figure 2-3. Mutable 型態
-
-
-### Shadow Copy 與 Deep Copy
 
 因為 Python 的 Immutable 的機制，透過 copy constructor 建立物件需要特別注意，不然有可能是指向相同的 object。這在呼叫函式或是建立物件特別需要注意，不然可能會導致原本的變數的值被函式或是物件改變。
 
 ![variables](https://github.com/yfl067200/yfl067200.github.io/assets/159564672/5db1efc7-1679-4d54-8e3e-38dba0f596f3)
 
-Figure 2-4. 本想建立一個 3*3 的陣列；結果只有 3 * 1 的陣列，其他兩行只是 reference 到第一行
+Figure 2-4. 本想建立一個 `3*3` 的陣列；結果只有 `3*1` 的陣列，其他兩行只是 reference 到第一行
 
 透過 copy module 中的 copy() 函式，可以將變數 (shadow copy) 進行複製，如此一來就可以確保原本的變數不會意外被修改；但是 shadow copy 的問題是，他只能複製一層 (variable -> object)。當有多層 (variable -> object -> object) 的資料，shadow copy 就無能為力。這時需要透過 copy module 中的 deepcopy() 函式進行 deep copy，確保多層的資料都有複製。
+
+# Standary Type Heirarchy
+
+Python 內建的資料型態包含以下
+
+## 特殊類
+
+| Type             | 說明                                                                  |     |
+| :--------------- | :------------------------------------------------------------------ | --- |
+| `None`           | 程式中的 `None` 即為此 Object <br> 函式若沒有指定回傳值，將回傳此 Object <br> 其值等同於 False |     |
+| `NotImplemented` | 當呼叫未實作的函式將會回傳此 Object                                               |     |
+| `Ellipsis`       | 程式中的 `...` 或是 `Ellipsis` 即為此 Object <br> 其值等同於 True                 |     |
+
+## 數值類 Object (`numbers.Number`)
+
+| Type               | 說明                                                                                                                                                                                                                      |
+| :----------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `numbers.Integral` | 用來處理正負數整數與 Boolean 值 <br> 整數的範圍是無限的，且為了 shift 等運算，採用 binary 形式保存 <br> 布林值算是整數的子集，其值為 `False` (0) 與 `True` (1) 兩種<br>     -> 任何非 0 的值都被視為 True，但是 True 的值永遠被視為 1<br> 除法分為真除法  (`/`) 與整數除法 (`//`) 兩種，整數除法只回傳商，不進行進位等額外的處理 |
+| `numbers.Real`     | 浮點數，採用 Double-Precision Floating-Point Value 的規範<br>     -> 因為近似問題，導致使用 `Real` 型態進行計算可能會導致問題。為此 python 提供 `Decimal` 型態，用來處理非整數的計算                                                                                       |
+| `number.Complex`   | 採用一對浮點數用來表示複數 (z = a + bx) 的實部與虛部的值，可以透過 z.real (a) 與 z.imag (b) 屬性存取                                                                                                                                                   |
+| `number.Fractions` | 擁有兩個屬性，`numberator` (分子) 與 `denominator` (分母)                                                                                                                                                                           |
+| `number.Decimal`   |                                                                                                                                                                                                                         |
+
+## 序列類 Object (`Sequences`)
+
+序列類的 Object 擁有一個有限，且可透過正整數 (起始為 0) 的 Index 定位的資料集合。
+
+Python 內建一個名為 len() 的 API 說明序列內資料的長度；假設序列 Object `A` 的長度是 `N`，可以透過 `A[n]` 存取 `A` 內部的資料；而 `n` 的範圍為 0 ~ N-1。
+
+部分序列類的 Object 支援更多功能的 `[]` 運算元。包含：
+
+1. 使用負數反向存取資料。`A[-1]` 即取得最後一個資料，`A[-2]`即取得倒數第二個資料
+2. 重複取樣，
+
+> [Note]
+> 重複取樣的格式為 `A[i:j:k]`；其中 `i` 與 `j` 為取樣的範圍，而 `k` 為取樣的間隔。
+> 
+> 舉個例子， `A` 是一個連續 100 個正整數的 `list`，第一個值是 1。如果我們透過 `A[10:20:2]` 所取樣到的資料就是 11、13、15、17、與 19。這是因為 `A[10:20]` 的集合是 11、12、13、14、15、16、17、18、19、與 20，而取樣的間隔為 2，所以取樣的 Index 就會是 0、2、4、6、與 8。
+ > 
+> 其中 `i` 與 `j` 可以省略，表示取樣的範圍開始於第一個，或是結束於最後一個。如果省略 `k`，表示取樣範圍內的所有資料都要。
+
+### Mutable Seqences
+
+| Type          | 說明                                                                                                     |
+| :------------ | :----------------------------------------------------------------------------------------------------- |
+| `Lists`       | `List` 儲存的任一元素都是一個獨立的 `Object`，可以視為透過 `Reference to Object` 的方式，以一種類似 `Table` 的方式將獨立的 `Object` 集合成一個資料 |
+| `Byte Arrays` | `Byte Array` 就是一個儲存多個 `Byte` 的陣列 <br> 可以透過 `decode()` 將 `ByteArray` 轉換成 `String`                       |
+### Immutable Sequences
+
+| Type      | 說明                                                                                                                                                                                                                                |
+| :-------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Bytes`   | `Byte` 的儲存長度是 8-bits <br> 可以透過 `decode()`將 `Byte` 轉換成 `String`                                                                                                                                                                    |
+| `Strings` | 資料格式是 Unicode，其範圍為 `U+0000` ~ `U+10FFFF` <br> 可以透過 `ord()` 將長度為 1 的 `string` 轉成 `Integer` (0~0x10FFFF)，也可透過 `char()`  將 `Integer` ( 0~0x10FFFF) 轉成一個長度為 1 的 `String`。<br> 將 `String` 轉換成 `Byte` 或是 `Byte Array` 的方式為透過 `encode()` |
+| `Tuples`  | `Tuple` 儲存的任一元素都是一個獨立的 `Object`，可以視為透過 `Reference to Object` 的方式，以一種類似 `Table` 的方式將獨立的 `Object` 集合成一個資料 <br> Tuple 可以視為 Container 的一種，但是依照其內部設計，讓他成為 Immutable                                                                    |
+
+## 集合類 Object (`Set`)
+
+與序列類的 Object 不同之處在於，集合類的資料是獨一無二，不可重複且亂序。注意獨一無二這一個特性，對於 `1` 或是 `1.0` 這兩個值因為比對會被判斷是同一個值，所以只會存在一個。
+ 
+因為是亂序，因此透過 Index 存取資料的方式不適合 (每次執行時，資料的位置可能不一樣)；因此透過 `len()` 取得總數，並依序逐一存取資料是推薦的方式。
+
+`Set` 主要用於從 `Sequence` 中剔除重複的資料，或是進行數學中 `insert`、 `union`、或是 `difference` 等運算
+
+| Type          | 說明                                                                                        |
+| :------------ | :---------------------------------------------------------------------------------------- |
+| `Sets`        | 是 Container 之一，為 mutable                                                                  |
+| `Frozen Sets` | 使用 `hash` 方式建立 `Set` 內部元素的順序，使其成為 Immutable <br> 可以成為其他 `set` 的元素，或是 `Dictionary` 的 `Key` |
+## 對照類 Object (`Mapping`)
+
+類似序列類 Object，可以透過 `Index` 存取某一元素。但是與 `Sequence` 不同之處在於，其 `Index` 並非正整數，而是對應的 `Key`。可以透過 `len()` 取得元素的總數量，並透過 iteration 的方式逐一取得 `Key`。
+
+| Type           | 說明                       |
+| :------------- | :----------------------- |
+| `Dictionaries` | 是 Container 之一，為 mutable |
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### 遮蔽 Shadowing

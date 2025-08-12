@@ -1,16 +1,94 @@
 # 函式
 
-Python 支援 Functional programming、Procedural programming、與 Object-oriented programming。建立函式的實作方法就是透過以下的格式，千萬別忘了冒號 (:)，那是 Python 用來建立 scope 的方式。
+建立函式的實作方法就是透過以下的格式，千萬別忘了==冒號 (:)==，那是 Python 用來建立 scope 的方式。
 
 ``` python
 def ${NAME}( [${VARIABLE} [= ${DEFAULT VALUE} ] ] ):
     ${CODE}
 ```
 
+## Scope
 
-## Functional programming
+函式自身是一個獨立的 scope，即便是子函式亦無法修改父函式的變數。以下程式碼為例，結果是兩個函式彼此擁有各自的同名的變數 
 
-Functional programming 跟 Procedural programming 的差異在於 Functional programming 的每一個函式都是獨立的。雖然 Procedural programming 也是使用函式架構出一個問題的解決方案，Functional programming 的函式只會依照輸入的參數進行運作，並輸出對應的結果；也就是說，當參數不變，結果也不變。
+``` Python
+def Outter():
+	test = 1
+	def Inner():
+		test = 2
+		print(f'Inner test = {test}')
+
+	Inner()
+	print(f'Outter test = {test}')
+
+Outter()
+```
+
+> 執行結果為
+> Inner test = 2
+> Outter test = 1
+
+###  nonlocal 與 global 宣告
+
+要讓不同 scope 之間共用同一個變數，在 C/C++ 可以使用指針作為函式的參數，實踐 `call by reference` 的機制；這樣其他的函式也可以修改共用變數的值。但是，Python 並沒有指針，因此 Python 提供兩種方式：`nonlocal` 與 `global` 宣告：其中 `nolocal` 宣告用於讓子函式能夠存取父函式的變數，而 `global` 宣告讓函式可以存取全域變數。
+
+``` Python
+def Outter():
+	test = 1
+	def Inner():
+		nonlocal test  #    宣布變數 test 並非本 scope 的變數，Python 會使用父函式變數
+		test = 2
+		print(f'Inner test = {test}')
+
+	Inner()
+	print(f'Outter test = {test}')
+
+Outter()
+```
+
+> 執行結果為
+> Inner test = 2
+> Outter test = 2
+
+``` Python
+def Inner():
+        global test  #  這邊改用 nonlocal 會出現 SyntaxError: invalid syntax 錯誤
+        test = 3
+        print(f'Inner test = {test}')
+
+def Outter():
+        test = 2
+        Inner()
+        print(f'Outter test = {test}')
+
+test = 1
+Outter()
+print(f'Global test = {test}')
+```
+
+> 執行結果為
+> Inner test = 3
+> Outter test = 2
+> Global test = 3
+
+### 參數傳遞
+
+除了 global 與 nonlocal 之外，要實踐 Call by Reference 的方式就是傳遞 mutable 變數。
+
+#### 搭配 * 與 ** 傳遞參數
+
+使用 `*` 與 `**` 傳遞參數，並非 Ｃ 語言一樣是傳遞位置；在 Python 中，是用來解析 `tuple` 與 `dict` 的型態。
+
+
+
+
+
+
+
+Python 支援 Functional programming、Procedural programming、與 Object-oriented programming。
+# Functional programming
+
+Functional programming 跟 Procedural programming 的差異在於 Functional programming 的每一個函式都是獨立的。雖然 Procedural programming 也是透過使用多個函式架構出一個問題的解決方案，Functional programming 的函式只會參考輸入的參數，任何非參數的資訊都不會改變函式的輸出。
 
 而 Procedural programming 或是 Object-oriented programming 的函式除了輸入的參數之外，還會使用外部的變數或是 State；這導致輸入的參數是一樣的，但是可能因為其他變數的影響，導致輸出不一樣。
 
