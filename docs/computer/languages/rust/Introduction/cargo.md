@@ -1,4 +1,4 @@
-cargo 是 rust 提供的官方工具之一，他主要的工作在於編譯與包裝專案。這邊將說明如何使用 cargo 建立新專案。完整的 `cargo` 說明，請參考附錄 A 的 [cargo](docs/computer/languages/rust/tools/cargo/readme.md) 章節
+cargo 是 rust 提供的官方工具之一，他主要的工作在於編譯與包裝專案。這邊將說明如何使用 cargo 建立新專案。完整的 `cargo` 說明，請參考附錄 A 的 [cargo](docs/Computer/languages/rust/tools/cargo/readme.md) 章節
 
 > [!Note]
 > 一般來說，我們會在 HOME 目錄下建立一個目錄，用來處理專案。我們這邊用 `~/workspaces/rust` 目錄作為所有 rust 專案的主目錄。

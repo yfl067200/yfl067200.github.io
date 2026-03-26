@@ -34,7 +34,7 @@
 
 # 參考資料
 
-決策樹在機械學習中是非常強大的演算法，廣泛的被使用。他不像[線性模型](./Linear%20Models)需要調整每個參數的係數就可以正常運作，也不需要將各參數的值轉換成同一計量單位 (scaling of the data)；他唯一的缺點就是過似合的比率過高，而這個問題將在[決策樹集成](./Ensembles%20of%20Decision%20Trees)中被解決。
+決策樹在機械學習中是非常強大的演算法，廣泛的被使用。他不像[線性模型](Linear%20Models.md)需要調整每個參數的係數就可以正常運作，也不需要將各參數的值轉換成同一計量單位 (scaling of the data)；他唯一的缺點就是過似合的比率過高，而這個問題將在[決策樹集成](Ensembles%20of%20Decision%20Trees.md)中被解決。
 
 目前在 [scikit-learn](https://scikit-learn.org/stable/) (使用 Python 的機械學習架構) 提供兩種演算法，該兩種演算法僅支援預剪枝：
 1. 實作於 sklearn.tree 中的 DecisionTreeClassifier 類別

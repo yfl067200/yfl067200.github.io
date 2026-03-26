@@ -1,7 +1,7 @@
 
 # 準備工作
 
-機械學習最大的困難在於，找出解決問題的演算法與合適的輸入與輸出 (Input and Output)。你給予的資訊必須是譨讓演算法理解，且能合理推算出正確結果的樣本組合。之後將會有章節說明如何建立好樣本的方法，為[特徵工程](docs/computer/AI/Feature%20Engineering/README.md)中的重點
+機械學習最大的困難在於，找出解決問題的演算法與合適的輸入與輸出 (Input and Output)。你給予的資訊必須是譨讓演算法理解，且能合理推算出正確結果的樣本組合。之後將會有章節說明如何建立好樣本的方法，為[特徵工程](docs/Computer/AI/Feature%20Engineering/README.md)中的重點
 
 > [!Note]
 > 在機器學習中，表格中的行被稱為樣本 (sample 或是 data point)，列被稱為特徵 (feature)。
@@ -18,11 +18,11 @@
 
 # 訓練方式
 
-目前最成功的訓練方式為[監督式學習](./Supervised%20Learning) (supervised learning)。藉由提供 Input 與 Output，讓演算法自行找出從 Input 得到"正確" Output 的方法。
+目前最成功的訓練方式為[監督式學習](Supervised%20Learning.md) (supervised learning)。藉由提供 Input 與 Output，讓演算法自行找出從 Input 得到"正確" Output 的方法。
 
 問題在於，Input 與 Output 組合與演算法所要解決的問題相關，因此提供正確的 Input 與 Output 組合將影響至鉅。舉一個例子，提供相同的男女的照片 (Input)，要找出辨識性別或是辨識是否站立的 Output 是不同的。
 
-相較於監督式學習，另一種訓練方式為[非監督學習](./Unsupervised%20Learning) (unsupervised learning)。在缺乏明確 Output 的情況下，要讓演算法從 Input 中學習並獲得正確的 Oupout 將會是複雜且難以控制。
+相較於監督式學習，另一種訓練方式為[非監督學習](Unsupervised%20Learning.md) (unsupervised learning)。在缺乏明確 Output 的情況下，要讓演算法從 Input 中學習並獲得正確的 Oupout 將會是複雜且難以控制。
 
 不論是哪一種訓練方式，都必須確保 Input 將會是可以被理解的。通常在決定 Input 前，會先建立一個表格；將每一行代表一個 Input，再將該 Input 對演算法有影響的資訊作為列。有了這個表格之後，使用者即可針對每一次學習得出的結果與預期的結果進行檢驗。
 

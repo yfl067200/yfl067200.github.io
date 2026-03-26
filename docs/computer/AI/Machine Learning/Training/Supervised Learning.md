@@ -21,18 +21,18 @@
 
 以下為監督式訓練常用的演算法
 
-- [K 近鄰演算法](./algorithms/K-Nearest%20Neighbors)
+- [K 近鄰演算法](K-Nearest%20Neighbors.md)
     - 當特徵數量增加，預測所需的時間會越長
     - 訓練資料屬於稀疏資料集 (sparse datasets) 時，效果都不好
     - 基本上沒人使用
-- [線性模型](./algorithms/Linear%20Models)
+- [線性模型](Linear%20Models.md)
     - 準確率高，但是訓練時間長
-- [樸素貝葉斯分類法](./algorithms/Naive%20Bayes%20Classifiers)
-- [決策樹](./algorithms/Decision%20Trees)
+- [樸素貝葉斯分類法](Naive%20Bayes%20Classifiers.md)
+- [決策樹](Decision%20Trees.md)
     - 準確率高，但是容易導致過似合
         - 可以透過預剪枝跟後剪枝的機制降低過似合的狀況
     - 有明確方法可以改善決策樹
 - [決策樹集成](Ensembles%20of%20Decision%20Trees.md)
-- [核化支援向量機](./algorithms/Kernelized%20Support%20Vector%20Machines)
-- [神經網路](./algorithms/Neural%20Networks)
+- [核化支援向量機](Kernelized%20Support%20Vector%20Machines.md)
+- [神經網路](Neural%20Networks.md)
 
