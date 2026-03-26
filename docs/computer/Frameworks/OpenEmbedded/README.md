@@ -32,7 +32,7 @@ Yocto Project 與 OpenEmbedded Project 整合之後，將 OpenBedded-Core 作為
 
 | Item                           | Description                                                         |
 | :----------------------------- | ------------------------------------------------------------------- |
-| [Bitbake](docs/Computer/framework/OpenEmbedded/bitbake/README.md) | OpenEmbedded Project 所開發的編譯工具。搭配 OpenEmbedded 架構，建立可客製化的 Linux 編譯環境 |
+| [Bitbake](docs/Computer/Frameworks/OpenEmbedded/bitbake/README.md) | OpenEmbedded Project 所開發的編譯工具。搭配 OpenEmbedded 架構，建立可客製化的 Linux 編譯環境 |
 # OpenBMC
 
  藉由 [D-Bus](docs/Computer/IPC/D-Bus/README.md) 作為訊息中心，所建立的 BMC 系統。將相關的東西整合進 meta-phosphor 目錄，搭被 Yocto Project，讓開發人員可以建立客製化的 BMC 系統

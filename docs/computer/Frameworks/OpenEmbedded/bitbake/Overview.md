@@ -1,4 +1,4 @@
-Bitbake 是搭配 OpenEmbedded Project 設計的 [[docs/Computer/framework/OpenEmbedded/README|OpenEmbedded-Core 架構]]，用來編譯 Linux 環境的工具。Bitbake 本身是使用 Python 開發，可以同時處理多個 python 或是 shell scripts；透過讀取使用者指定的 layers 下的 metadata，bitbake 將會對編譯依照相依性等進行排程。為了能更方便的了解 bitbake 的功能，以下就先對 bitbake 相關的術語 (Terminology) 進行說明
+Bitbake 是搭配 OpenEmbedded Project 設計的 [[docs/Computer/Frameworks/OpenEmbedded/README|OpenEmbedded-Core 架構]]，用來編譯 Linux 環境的工具。Bitbake 本身是使用 Python 開發，可以同時處理多個 python 或是 shell scripts；透過讀取使用者指定的 layers 下的 metadata，bitbake 將會對編譯依照相依性等進行排程。為了能更方便的了解 bitbake 的功能，以下就先對 bitbake 相關的術語 (Terminology) 進行說明
 
 # 術語 (Terminology)
 

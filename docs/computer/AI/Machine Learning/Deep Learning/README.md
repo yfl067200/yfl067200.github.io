@@ -1,1 +1,0 @@
-深度學習 (Deep Learning，DL) 是機械學習 (Machine Learning，ML) 的子項目之一。透過多層 (4層以上) 神經網路 (Neural Networks) 來模擬人類的大腦，以進行複雜資訊的分析。目前深度學習表現最好的領域包括影像辨識、語音辨識、與自然語言處理 (Natural Language Process，NLP)。

@@ -2,9 +2,15 @@ This is my study notes
 
 # Computer
 
-- [Artificial Intellegent](./Computer/AI/README)
-- [Machine Learning](./Computer/AI/Machine%20Learning/README)
+## Artificial Intellegent
 
+- [Intorduction](docs/Computer/AI/README)
+
+- [Machine Learning](docs/Computer/AI/Machine%20Learning/README)
+
+    - [Deep Learning](docs/Computer/AI/Machine%20Learning/Deep%20Learning/README)
+
+    - [Natural Language Processing](docs/Computer/AI/Machine%20Learning/Natural%20Language%20Processing/README)
 ## Languages
 
 - [C++](L-Value%20and%20R-Value.md)
@@ -13,11 +19,11 @@ This is my study notes
 
 - [Rust](docs/Computer/languages/rust/README.md)
 
-## Framework
+## Frameworks
 
--  [OpenEmbedded](docs/Computer/framework/OpenEmbedded/README.md)
+-  [OpenEmbedded](docs/Computer/Frameworks/OpenEmbedded/README.md)
 
- - [OpenBMC](docs/Computer/framework/OpenBMC/readme.md)
+ - [OpenBMC](docs/Computer/Frameworks/OpenBMC/readme.md)
    
 ## IPC
 
