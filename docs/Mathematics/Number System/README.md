@@ -1,11 +1,26 @@
-數的系統經過人類的觀察與思考，從簡單的自然數 $\mathbb{N}$ 、
+數論 (Number Theory) 是純數 (pure mathematics) 領域的分支之一，主要研究數字本身與相關的算數運算元。
 
-> [NOTE]
-> 數字系統的集合：
-> $自然數 (\mathbb{N}) \subset 整數 (\mathbb{Z}) \subset 有理數 (\mathbb{Q}) \subset 實數 (\mathbb{R}) \subset 複數 (\mathbb{C})$ 
+# 數字系統
 
-- [自然數 (Natural Number)](./Natural Number)
-- [整數 (Integer)](./Integer)
-- [有理數 (Rational Number)](./Rational Number)
-- [實數 (Real Number)](./Real Number)
-- [複數 (Complex Number)](./Complex Number)
+數的系統經過人類的觀察與思考，從簡單的自然數 $\mathbb{N}$ 開始，目前已經進展到了複數。在複數之前，所有的值都可以對映到一條無限延伸到正負無窮的直線上一個點；複數則是對映到平面上的多個點。
+
+| 種類                     | 符號           | 定義                                                                                 |
+| :--------------------- | ------------ | ---------------------------------------------------------------------------------- |
+| 自然數 (Natural Numbers)  | $\mathbb{N}$ | 正整數的集合                                                                             |
+| 整數 (Integers)          | $\mathbb{Z}$ | 用來處理兩個自然數的差，故包含 0 與負整數                                                             |
+| 有理數 (Rational Numbers) | $\mathbb{Q}$ | 用來處理兩個整數的商 (分數)，開始包含小數                                                             |
+| 實數 (Real Numbers)      | $\mathbb{R}$ | 有理數表示那些可以用尺規可以測量的數值<br>無理數 (Irrational Number) 是無法測量的，因為他的小數是無窮多位<br>實數即有理數與無理數的集合 |
+| 複數 (complex numbers)   | $\mathbb{C}$ | 從直線上的點 (a) 投影到平面上某一個座標 (z)                                                         |
+
+> [!NOTE]
+> 正當人類以為可以用有理數 (Rational Number) 能解釋所有的數值之後，就發現了例外。相傳是畢達哥拉斯門下的弟子希帕索斯 (Hippasus) 發現了 $\sqrt{2}$ 這個數，其小數點後的數字無窮無盡，這違反了有理數定義。偏偏這個 $\sqrt{2}$ 的值又能夠透過尺規定位在那個無窮盡的直線上，這讓畢達哥拉斯無法接受，導致了西帕索斯的死亡。
+
+## 複數 (complex numbers)
+
+複數 (Complex Number) 的概念很早就被人發現，但是一直到近代才被人理解。複數中存在一個特殊的數值 $i$ (Imaginary Unit，想像中的單位)，這個值是 $-1$ 的平方根。一般來說，任何數的平方都會是正數。用 $-3$ 舉個例子，其平方為 $9$，為正數 ($(-3)^2 = 9$)。 因此 $i^2 = (-1)$ 這一個概念很難被人接受，更別提如何證明其存在。
+
+直到 18 世紀末，由卡斯帕爾·韋塞爾 ([Caspar Wessel](https://zh.wikipedia.org/wiki/Caspar_Wessel)) 在介紹複平面 (Complex plane) 時提出複數的幾何解釋。如下圖，水平軸為水平實軸 (Real axis，Re) 表示複數的實部 (Real Part)，垂直軸為垂直虛軸 (Imaginary axus，Im) 表示複數的虛部 (Imaginary Part)。
+
+其中到達座標 $z$ 與 座標 $\bar{z}$ 兩者與水平實軸的角度相等，且兩者向量的絕對值相等 ($\vert\vec{z}\vert = \vert\vec{\bar{z}}\vert = \sqrt{x^2 + (yi)^2}$)；進而獲得 $i^2 = \pm1$ 的結果。
+
+![[Screenshot 2026-03-18 at 11.21.51 PM.png]]

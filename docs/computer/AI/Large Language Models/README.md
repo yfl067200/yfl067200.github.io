@@ -1,0 +1,1 @@
+大語言模型 (Large Language Models，LLM) 源於深度學習 (Deep Learning，DL)。深度學習的核心在於透過多層級的神經網路 (Neural Networks)，將未標註的資訊進行辨識與分類，進而能預測或是產生新資訊。

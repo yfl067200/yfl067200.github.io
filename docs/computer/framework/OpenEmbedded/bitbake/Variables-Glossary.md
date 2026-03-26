@@ -81,7 +81,7 @@
 
 ## BB 開頭
 
-與 `LAYER` 開頭的變數用來設定 Bitbake 如何處理 layers 與其下的 Class 檔案與 Recipe 檔案。請參考[[Variables]]下的 "layer.conf 檔案" 一節
+與 `LAYER` 開頭的變數用來設定 Bitbake 如何處理 layers 與其下的 Class 檔案與 Recipe 檔案。請參考[[docs/computer/framework/OpenEmbedded/bitbake/Variables]]下的 "layer.conf 檔案" 一節
 
 | 變數                    | 說明                                                                                   |
 | :-------------------- | ------------------------------------------------------------------------------------ |
@@ -100,7 +100,7 @@
 
 ## BBFILE_ 開頭
 
-以下 "BBFILE_" 開頭的變數，內容都來自各 Layers 下 conf/layer.conf 檔案的同名變數。請參考[[Variables]]下的 "layer.conf 檔案" 一節
+以下 "BBFILE_" 開頭的變數，內容都來自各 Layers 下 conf/layer.conf 檔案的同名變數。請參考[[docs/computer/framework/OpenEmbedded/bitbake/Variables]]下的 "layer.conf 檔案" 一節
 
 # C 開頭
 
@@ -162,7 +162,7 @@
 
 # L 開頭
 
-與 `BB` 開頭的變數用來設定 Bitbake 如何處理 layers 與其下的 Class 檔案與 Recipe 檔案，請參考[[Variables]]下的 "layer.conf 檔案" 一節
+與 `BB` 開頭的變數用來設定 Bitbake 如何處理 layers 與其下的 Class 檔案與 Recipe 檔案，請參考[[docs/computer/framework/OpenEmbedded/bitbake/Variables]]下的 "layer.conf 檔案" 一節
 
 # M 開頭
 

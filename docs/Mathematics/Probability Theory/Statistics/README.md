@@ -1,0 +1,5 @@
+統計 (statistics) 是一個源於[機率](../README) (probability) 的應用科學，專注於分析與分類資料。起源於 1800 後期，在 20 世紀初期由法蘭西斯·高爾頓 ([Francis Galton](https://en.wikipedia.org/wiki/Francis_Galton))、卡爾·皮爾森 ([Karl Pearson](https://en.wikipedia.org/wiki/Karl_Pearson))、與羅納德·愛爾默·費雪 ([Ronald Aylmer Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher)) 提出的關鍵概念，包含實驗設計 ([Design of experiments](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://en.wikipedia.org/wiki/Design_of_experiments&ved=2ahUKEwjf-oaekaqTAxVX5skDHZL6GmoQFnoECCcQAQ&usg=AOvVaw0jz0f5vINLBxfOyufCvyom)) 與最大概似估計 ([Maximum likelihood estimation](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://en.wikipedia.org/wiki/Maximum_likelihood_estimation&ved=2ahUKEwi7t67LkaqTAxVvGtAFHRYbIL8QFnoECB0QAQ&usg=AOvVaw2LG0X2jyriM5d7RunpOvGL)) 等，成為近代統計學的基礎。
+
+傳統的統計主要是透過推論建立結論，有些處理大量資訊的複雜流程往往是源自於少量樣本建立的。而近代統計學的第一步為理解資料，
+
+- 探索性資料分析 (Exploratory data analysis，EDA)

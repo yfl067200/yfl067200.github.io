@@ -4,9 +4,9 @@ This is my study notes
 
 ## Languages
 
-- [C++](./computer/languages/C++/R-Value.md)
+- [C++](L-Value%20and%20R-Value.md)
 
-- [Python](docs/computer/languages/python/README.md)
+- [Python](docs/computer/languages/python_OLD/README.md)
 
 - [Rust](docs/computer/languages/rust/README.md)
 

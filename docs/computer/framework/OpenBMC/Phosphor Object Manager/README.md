@@ -14,14 +14,14 @@
 
 本服務提供以下函式，讓其他程序可以查詢到所尋找的 D-Bus 相關資料
 
-| 函式 | 功能 | 參數 | 回傳值
-|:-----|:-----|:-----|:------
-| GetAncestors |
-| GetAssociatedSubPath |
-| GetAssociatedSubTreePaths |
-| GetObject | 列出提供相同 Path 與 Interface 的服務 | sas <br>第一個 string 為 Path，而後面的 array of string 是 Interface (Optional) | a{sas} <br>第一個 string 為 Service，後面的 array of string 是該 Path 下的 Interface |
-| GetSubTree |
-| GetSubTreePaths |
+| 函式                        | 功能                                                                                                                                        |
+| :------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| GetAncestors              | 從某個 Path 往 "/" 方向找，列出符合 Interface 名稱的 D-Bus 資訊<br>D-Bus 資訊是以 Path 為 Key，擁有該 Path 的 Service 為 SubKey，該 Path 下的 Interface 集合為 Value         |
+| GetAssociatedSubPath      | 詳見 Association 一節                                                                                                                         |
+| GetAssociatedSubTreePaths | 詳見 Association 一節                                                                                                                         |
+| GetObject                 | 列出符合 Path 名稱，且其下 Interface 名稱亦符合的 D-Bus 資訊<br>D-Bus 資訊是以 Service 為 Key，該 Path 下的 Interface 為 Value 集合                                     |
+| GetSubTree                | 與 GetAncestors 相反，是往該 Path 下找符合 Interface 名稱的 D-Bus 資訊<br>D-Bus 資訊是以 Path 為 Key，擁有該 Path 的 Service 為 SubKey，該 Path 下的 Interface 集合為 Value |
+| GetSubTreePaths           | 同 GetSubTree，只是返回值只有 Path 的集合                                                                                                             |
 
 ### GetAncestors
 
@@ -30,6 +30,9 @@
 - 輸入參數如下，型態為 sas
     - Path 名稱，型態為 string
     - Interface 名稱，此項目為 Optional，型態為 array of string
+         - 只要某一個 Interface 符合，即會返回對應的 D-Bus 資訊
+        - 返回值不會包含重複的 D-Bus 資訊
+        - 賦予空集合，即會返回 SubTree 以下的所有資訊
 - 輸出資料如下，型態為 a{sa{sas}}
     - Path 名稱集合，型態為 array of string 
     - Service 名稱集合，型態為 array of string
@@ -47,16 +50,12 @@ xyz.openbmc_project.ObjectMapper.GetAncestors \
 string:"/xyz/openbmc_project/sensors/voltage/BMC_P12V_STBY" \
 array:string:"org.freedesktop.DBus.ObjectManager"
 
-
-
+busctl call xyzopenbmc_project.ObjectMapper \
+/xyz/openbmc_project/object_mapper \ 
+xyz.openbmc_project.ObjectMapper \
+GetAncestors sas "/xyz/openbmc_project/sensors/voltage/BMC_P12V_STBY" \
+                 1 "org.freedesktop.DBus.ObjectManager" 
 ```
-
-
-### GetAssociatedSubTree
-
-
-### GetAssociatedSubTreePaths
-
 
 ### GetObject
 
@@ -65,6 +64,9 @@ array:string:"org.freedesktop.DBus.ObjectManager"
 - 輸入參數如下，型態為 sas
     - Path 名稱，型態為 string
     - Interface 名稱，此項目為 Optional，型態為 array of string
+        - 只要某一個 Interface 符合，即會返回對應的 D-Bus 資訊
+        - 返回值不會包含重複的 D-Bus 資訊
+        - 賦予空集合，即會返回所有符合 Path 名稱的 Service 資訊
 - 輸出資料如下，型態為 a{sas}
     - Service 名稱集合，型態為 array of string
     - Interface 名稱集合，型態為 array of string
@@ -212,6 +214,11 @@ GetSubTree sias "/xyz/openbmc_project/sensors/current" 0 \
 - 輸出資料如下，型態為 as
     - Path 名稱集合，型態為 array of string
     
+
+# Association
+
+Association 是本服務產生的一個特殊 Object Path，用來連結兩個有關聯的 Objects。建立 Association 的方式是，實作出一個 Interface ==**xyz.openbmc_project.Association.Definitions**==；在該 Interface 下會有一個名為 `Associations` 的屬性
+
 # Reference
 
 [官方說明文件](https://github.com/openbmc/docs/blob/master/architecture/object-mapper.md)
